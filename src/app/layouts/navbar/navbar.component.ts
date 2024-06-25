@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { CarritoService } from '../../services/carrito.service';
 
 interface CarritoItem {
+  id: number;
   name: string;
   price: number;
   quantity: number;
@@ -47,6 +48,7 @@ export class NavbarComponent implements OnInit {
 
     window.addEventListener('storage', () => {
       this.checkLoginStatus();
+      this.cargarCarrito();
     });
 
     this.carritoService.carrito$.subscribe((carrito) => {
@@ -77,9 +79,11 @@ export class NavbarComponent implements OnInit {
 
   cargarCarrito() {
     this.carritoService.cargarCarrito();
+    window.dispatchEvent(new Event('storage'));
   }
 
   eliminarDelCarrito(item: CarritoItem) {
     this.carritoService.eliminarDelCarrito(item);
+    window.dispatchEvent(new Event('storage'));
   }
 }

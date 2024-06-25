@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 interface CarritoItem {
+  id: number;
   name: string;
   price: number;
   quantity: number;
@@ -54,7 +55,7 @@ export class CarritoService {
   agregarAlCarrito(producto: CarritoItem): void {
     const currentCarrito = this.carritoSubject.getValue();
     const itemIndex = currentCarrito.findIndex(
-      (item) => item.name === producto.name
+      (item) => item.id === producto.id
     );
 
     if (itemIndex > -1) {
@@ -72,7 +73,7 @@ export class CarritoService {
   eliminarDelCarrito(producto: CarritoItem): void {
     const currentCarrito = this.carritoSubject
       .getValue()
-      .filter((item) => item.name !== producto.name);
+      .filter((item) => item.id !== producto.id);
     this.carritoSubject.next(currentCarrito);
     this.guardarCarrito();
   }

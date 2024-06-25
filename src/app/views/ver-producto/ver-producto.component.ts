@@ -29,6 +29,10 @@ export class VerProductoComponent implements OnInit {
   }
 
   agregarAlCarrito(producto: any): void {
-    this.carritoService.agregarAlCarrito({ ...producto, quantity: 1 });
+    this.carritoService.agregarAlCarrito({
+      ...producto,
+      id: producto.id,
+      quantity: 1,
+    });
   }
 }
