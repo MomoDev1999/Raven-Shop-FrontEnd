@@ -1,0 +1,150 @@
+<div id="registrar">
+  <h2 class="text-center">Crear cuenta</h2>
+  <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="row">
+    <div class="form-group col-md-6">
+      <label for="register-username">Usuario</label>
+      <input
+        type="text"
+        id="register-username"
+        name="username"
+        [(ngModel)]="username"
+        class="form-control"
+        required
+        minlength="3"
+      />
+      <div
+        *ngIf="registerForm.submitted && username.length < 3"
+        class="error-message"
+      >
+        Usuario es requerido y debe tener al menos 3 caracteres.
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="register-phone">Teléfono</label>
+      <input
+        type="tel"
+        id="register-phone"
+        name="phone"
+        [(ngModel)]="phone"
+        class="form-control"
+        required
+      />
+      <div
+        *ngIf="registerForm.submitted && !isPhoneValid(phone)"
+        class="error-message"
+      >
+        Teléfono es requerido y debe tener 8 dígitos.
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="register-firstname">Nombre</label>
+      <input
+        type="text"
+        id="register-firstname"
+        name="firstname"
+        [(ngModel)]="firstname"
+        class="form-control"
+        required
+      />
+      <div *ngIf="registerForm.submitted && !firstname" class="error-message">
+        Nombre es requerido.
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="register-lastname">Apellido</label>
+      <input
+        type="text"
+        id="register-lastname"
+        name="lastname"
+        [(ngModel)]="lastname"
+        class="form-control"
+        required
+      />
+      <div *ngIf="registerForm.submitted && !lastname" class="error-message">
+        Apellido es requerido.
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="register-birthdate">Fecha de Nacimiento</label>
+      <input
+        type="date"
+        id="register-birthdate"
+        name="birthdate"
+        [(ngModel)]="birthdate"
+        class="form-control"
+        required
+      />
+      <div *ngIf="registerForm.submitted && !birthdate" class="error-message">
+        Fecha de Nacimiento es requerida.
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="register-email">Correo Electrónico</label>
+      <input
+        type="email"
+        id="register-email"
+        name="email"
+        [(ngModel)]="email"
+        class="form-control"
+        required
+      />
+      <div
+        *ngIf="registerForm.submitted && !isEmailValid(email)"
+        class="error-message"
+      >
+        Correo electrónico es requerido y debe ser válido.
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <label for="register-address">Dirección</label>
+      <input
+        type="text"
+        id="register-address"
+        name="address"
+        [(ngModel)]="address"
+        class="form-control"
+        required
+      />
+      <div *ngIf="registerForm.submitted && !address" class="error-message">
+        Dirección es requerida.
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="register-password">Contraseña</label>
+      <input
+        type="password"
+        id="register-password"
+        name="password"
+        [(ngModel)]="password"
+        class="form-control"
+        required
+        minlength="6"
+      />
+      <div
+        *ngIf="registerForm.submitted && password.length < 6"
+        class="error-message"
+      >
+        Contraseña es requerida y debe tener al menos 6 caracteres.
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="register-confirm-password">Confirmar contraseña</label>
+      <input
+        type="password"
+        id="register-confirm-password"
+        name="confirmPassword"
+        [(ngModel)]="confirmPassword"
+        class="form-control"
+        required
+      />
+      <div *ngIf="passwordMismatch" class="error-message">
+        Las contraseñas no coinciden.
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <button type="submit" class="btn btn-primary w-100" id="register-btn">
+        Registrarse
+      </button>
+    </div>
+  </form>
+</div>

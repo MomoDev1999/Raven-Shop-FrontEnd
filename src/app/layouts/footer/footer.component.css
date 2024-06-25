@@ -1,0 +1,44 @@
+#footer {
+  background: linear-gradient(#807f7fe6, rgba(110, 110, 110, 0.9)),
+    url("../../../assets/img/img_4.jpg");
+}
+
+#footer h5 {
+  color: #facfad; /* Color del título */
+  margin-bottom: 10px; /* Espaciado inferior del título */
+  margin-top: 10px;
+}
+
+#footer p,
+#footer ul {
+  margin-bottom: 10px; /* Espaciado inferior entre párrafos y listas */
+  color: #ffffff; /* Color de los enlaces */
+}
+
+#footer a {
+  color: #facfad; /* Color de los enlaces */
+}
+
+#footer a:hover {
+  color: #f8bd7f; /* Color al pasar el mouse sobre los enlaces */
+}
+
+#footer ul {
+  padding-left: 0; /* Elimina el padding izquierdo de la lista */
+  list-style: none; /* Elimina los estilos de la lista */
+}
+
+#footer ul li {
+  margin-bottom: 5px; /* Espaciado entre elementos de la lista */
+}
+
+.footer-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.footer-content {
+  flex: 1;
+}

@@ -1,0 +1,46 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 *ngIf="categoria">Resultados para categoría: {{ categoria }}</h2>
+      <h2 *ngIf="searchTerm">Resultados para: {{ searchTerm }}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let producto of productos">
+      <div class="card mb-4 shadow-sm">
+        <img
+          [src]="producto.image"
+          class="card-img-top mt-3"
+          [alt]="producto.title"
+        />
+        <div class="card-body">
+          <h5
+            class="card-title text-center product-title"
+            title="{{ producto.title }}"
+          >
+            {{ producto.title }}
+          </h5>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-between align-items-center">
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-secondary ver-mas-btn"
+              (click)="verMas(producto.id)"
+            >
+              Ver más
+            </button>
+            <p class="card-text">{{ producto.price | currency }}</p>
+            <button
+              type="button"
+              class="btn btn-sm btn-primary"
+              (click)="agregarAlCarrito(producto)"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+/* Privacy Policy Styles */
+.privacy-title {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #2e8b57;
+}
+
+.privacy-subtitle {
+  font-size: 1.5em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #006400;
+}
+
+.privacy-text {
+  font-size: 1em;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.privacy-list {
+  margin-left: 20px;
+  list-style-type: disc;
+}
+
+.privacy-item {
+  font-size: 1em;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.faq-section,
+.terms-section,
+.privacy-section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}

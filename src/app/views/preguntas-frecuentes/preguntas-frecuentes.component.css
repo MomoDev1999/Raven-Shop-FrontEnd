@@ -1,0 +1,29 @@
+/* FAQ Styles */
+.faq-title {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #0066cc;
+}
+
+.faq-subtitle {
+  font-size: 1.5em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #004080;
+}
+
+.faq-text {
+  font-size: 1em;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.faq-section,
+.terms-section,
+.privacy-section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}

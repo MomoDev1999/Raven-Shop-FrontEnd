@@ -1,0 +1,41 @@
+.mis-compras-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  transition: all 0.3s;
+  height: 300px; /* Tamaño fijo */
+}
+
+.mis-compras-card:hover {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mis-compras-card img {
+  width: 100%;
+  max-height: 150px; /* Tamaño máximo de la imagen */
+  object-fit: contain; /* Ajusta la imagen dentro del contenedor manteniendo la relación de aspecto */
+  border-bottom: 1px solid #ddd;
+}
+
+.mis-compras-card-body {
+  padding: 15px;
+}
+
+.mis-compras-card-title {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.mis-compras-card-price {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.mis-compras-card-quantity,
+.mis-compras-card-date,
+.mis-compras-card-status {
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}

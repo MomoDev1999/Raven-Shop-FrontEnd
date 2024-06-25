@@ -1,0 +1,100 @@
+<div id="index">
+  <div
+    id="carouselExampleIndicators"
+    class="carousel slide"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-indicators">
+      <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="0"
+        class="active"
+        aria-current="true"
+        aria-label="Slide 1"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="1"
+        aria-label="Slide 2"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="2"
+        aria-label="Slide 3"
+      ></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="../../../assets/img/img_1.jpg" class="d-block" alt="..." />
+      </div>
+      <div class="carousel-item">
+        <img src="../../../assets/img/img_2.jpg" class="d-block" alt="..." />
+      </div>
+      <div class="carousel-item">
+        <img src="../../../assets/img/img_3.jpg" class="d-block" alt="..." />
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <div class="container mt-3">
+    <div class="row" id="product-list">
+      <div class="col-md-4" *ngFor="let producto of productos">
+        <div class="card mb-4 shadow-sm">
+          <img
+            src="{{ producto.image }}"
+            class="card-img-top mt-3"
+            alt="{{ producto.title }}"
+          />
+          <div class="card-body">
+            <h5
+              class="card-title text-center product-title"
+              title="{{ producto.title }}"
+            >
+              {{ producto.title }}
+            </h5>
+          </div>
+          <div class="card-footer">
+            <div class="d-flex justify-content-between align-items-center">
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-secondary ver-mas-btn"
+                (click)="verMas(producto.id)"
+              >
+                Ver más
+              </button>
+              <p class="card-text">{{ producto.price }}</p>
+              <button
+                type="button"
+                class="btn btn-sm btn-primary"
+                (click)="agregarAlCarrito(producto)"
+              >
+                Agregar al carrito
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

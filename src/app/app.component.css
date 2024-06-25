@@ -1,0 +1,186 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+::ng-deep body {
+  background-color: #f2f2f2;
+  color: #555555;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  font-family: "Lato", sans-serif;
+}
+
+app-navbar,
+app-footer {
+  flex-shrink: 0;
+}
+
+::ng-deep .form-control {
+  border-radius: 0;
+}
+
+::ng-deep .btn-outline-success {
+  color: #333333; /* Color del texto del botón de éxito */
+  border-color: #333333; /* Color del borde del botón de éxito */
+}
+
+::ng-deep .btn-outline-success:hover {
+  color: #f2f2f2; /* Color del texto del botón de éxito al pasar el mouse */
+  background-color: #ffcc00; /* Fondo del botón de éxito al pasar el mouse */
+  border-color: #ffcc00; /* Color del borde del botón de éxito al pasar el mouse */
+}
+
+::ng-deep .btn-primary {
+  background-color: #ffcc00; /* Fondo del botón primario */
+  border-color: #ffcc00; /* Color del borde del botón primario */
+}
+
+::ng-deep .btn-primary:hover {
+  background-color: #f8bd7f; /* Fondo del botón primario al pasar el mouse */
+  border-color: #f8bd7f; /* Color del borde del botón primario al pasar el mouse */
+}
+
+::ng-deep .btn-outline-secondary {
+  color: #333333; /* Color del texto del botón secundario */
+  border-color: #333333; /* Color del borde del botón secundario */
+}
+
+::ng-deep .btn-outline-secondary:hover {
+  color: #f2f2f2; /* Color del texto del botón secundario al pasar el mouse */
+  border-color: #ffcc00; /* Color del borde del botón secundario al pasar el mouse */
+}
+
+::ng-deep .form-group {
+  margin-bottom: 1rem;
+}
+
+::ng-deep .form-group label {
+  font-weight: bold;
+}
+
+::ng-deep .invalid-feedback {
+  display: none;
+  color: red;
+}
+
+::ng-deep .form-control:invalid ~ .invalid-feedback {
+  display: block;
+}
+
+::ng-deep .custom-dropdown {
+  position: relative;
+}
+
+::ng-deep .custom-dropdown-toggle {
+  cursor: pointer;
+}
+
+::ng-deep .custom-dropdown-menu {
+  width: 350px;
+}
+
+::ng-deep .custom-dropdown-header {
+  font-weight: bold;
+}
+
+::ng-deep .custom-item {
+  padding: 10px 20px;
+}
+
+::ng-deep .custom-item-image {
+  width: 70px;
+  height: auto;
+}
+
+::ng-deep .custom-item-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+::ng-deep .custom-item-text {
+  margin-bottom: 5px;
+}
+
+::ng-deep .custom-item-price {
+  font-weight: bold;
+}
+
+::ng-deep .custom-divider {
+  margin: 5px 0;
+}
+
+::ng-deep .custom-footer {
+  padding-top: 10px;
+  text-align: center;
+}
+
+::ng-deep .custom-btn {
+  font-size: 14px;
+}
+
+::ng-deep .dropdown-item-quantity {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+::ng-deep .cart-container {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+::ng-deep .cart-item {
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+::ng-deep .cart-item-image {
+  border-radius: 10px 0 0 10px;
+}
+
+::ng-deep .cart-item-details {
+  padding: 15px;
+}
+
+::ng-deep .cart-item-title {
+  font-size: 1.25rem;
+  margin-bottom: 5px;
+}
+
+::ng-deep .cart-item-price {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+::ng-deep .cart-item-quantity {
+  font-size: 0.875rem;
+  margin-bottom: 10px;
+}
+
+::ng-deep .btn-remove {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+}
+
+::ng-deep .cart-buttons .btn {
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+}
+
+::ng-deep .btn-checkout {
+  background-color: #007bff;
+}
+
+::ng-deep .btn-checkout:hover {
+  background-color: #0056b3;
+}

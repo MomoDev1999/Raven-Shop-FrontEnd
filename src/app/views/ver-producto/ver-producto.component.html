@@ -1,0 +1,14 @@
+<div class="ver-producto-container">
+  <div *ngIf="producto">
+    <h1>{{ producto.title }}</h1>
+    <img [src]="producto.image" alt="{{ producto.title }}" />
+    <p>{{ producto.description }}</p>
+    <p><strong>Precio: </strong>{{ producto.price | currency }}</p>
+    <button class="btn btn-primary" (click)="agregarAlCarrito(producto)">
+      Agregar al carrito
+    </button>
+  </div>
+  <div *ngIf="!producto" class="producto-no-encontrado">
+    <p>Producto no encontrado.</p>
+  </div>
+</div>
