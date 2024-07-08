@@ -12,12 +12,6 @@
         required
         minlength="3"
       />
-      <div
-        *ngIf="registerForm.submitted && username.length < 3"
-        class="error-message"
-      >
-        Usuario es requerido y debe tener al menos 3 caracteres.
-      </div>
     </div>
     <div class="form-group col-md-6">
       <label for="register-phone">Teléfono</label>
@@ -29,12 +23,6 @@
         class="form-control"
         required
       />
-      <div
-        *ngIf="registerForm.submitted && !isPhoneValid(phone)"
-        class="error-message"
-      >
-        Teléfono es requerido y debe tener 8 dígitos.
-      </div>
     </div>
     <div class="form-group col-md-6">
       <label for="register-firstname">Nombre</label>
@@ -46,9 +34,6 @@
         class="form-control"
         required
       />
-      <div *ngIf="registerForm.submitted && !firstname" class="error-message">
-        Nombre es requerido.
-      </div>
     </div>
     <div class="form-group col-md-6">
       <label for="register-lastname">Apellido</label>
@@ -60,9 +45,6 @@
         class="form-control"
         required
       />
-      <div *ngIf="registerForm.submitted && !lastname" class="error-message">
-        Apellido es requerido.
-      </div>
     </div>
     <div class="form-group col-md-6">
       <label for="register-birthdate">Fecha de Nacimiento</label>
@@ -74,9 +56,6 @@
         class="form-control"
         required
       />
-      <div *ngIf="registerForm.submitted && !birthdate" class="error-message">
-        Fecha de Nacimiento es requerida.
-      </div>
     </div>
     <div class="form-group col-md-6">
       <label for="register-email">Correo Electrónico</label>
@@ -88,12 +67,6 @@
         class="form-control"
         required
       />
-      <div
-        *ngIf="registerForm.submitted && !isEmailValid(email)"
-        class="error-message"
-      >
-        Correo electrónico es requerido y debe ser válido.
-      </div>
     </div>
     <div class="form-group col-md-12">
       <label for="register-address">Dirección</label>
@@ -105,9 +78,6 @@
         class="form-control"
         required
       />
-      <div *ngIf="registerForm.submitted && !address" class="error-message">
-        Dirección es requerida.
-      </div>
     </div>
     <div class="form-group col-md-6">
       <label for="register-password">Contraseña</label>
@@ -120,12 +90,6 @@
         required
         minlength="6"
       />
-      <div
-        *ngIf="registerForm.submitted && password.length < 6"
-        class="error-message"
-      >
-        Contraseña es requerida y debe tener al menos 6 caracteres.
-      </div>
     </div>
     <div class="form-group col-md-6">
       <label for="register-confirm-password">Confirmar contraseña</label>
@@ -137,9 +101,6 @@
         class="form-control"
         required
       />
-      <div *ngIf="passwordMismatch" class="error-message">
-        Las contraseñas no coinciden.
-      </div>
     </div>
     <div class="form-group col-md-12">
       <button type="submit" class="btn btn-primary w-100" id="register-btn">

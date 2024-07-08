@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FirebaseService } from '../../services/firebase.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrar',
@@ -21,29 +23,97 @@ export class RegistrarComponent {
   password: string = '';
   confirmPassword: string = '';
   passwordMismatch: boolean = false;
+  userExistsError: string = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private firebaseService: FirebaseService
+  ) {}
 
   onSubmit() {
     if (this.isFormValid()) {
       if (this.password !== this.confirmPassword) {
         this.passwordMismatch = true;
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Las contraseñas no coinciden.',
+        });
         return;
       }
 
-      // Guardar en localStorage
-      localStorage.setItem('loggedIn', 'true');
-      window.dispatchEvent(new Event('storage'));
-      // Redirigir a la página de inicio
-      this.router.navigate(['/index']);
+      const newUser = {
+        usuario: this.username,
+        telefono: this.phone,
+        nombre: this.firstname,
+        apellido: this.lastname,
+        fecha_nacimiento: this.birthdate,
+        correo: this.email,
+        direccion: this.address,
+        password: this.password,
+      };
 
-      // Limpiar el formulario
-      this.resetForm();
-      this.passwordMismatch = false;
+      this.firebaseService.userExists(this.email, this.username).subscribe(
+        (exists) => {
+          if (exists) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'El usuario o el correo electrónico ya están registrados.',
+            });
+          } else {
+            this.firebaseService.addUser(newUser).subscribe(
+              (response) => {
+                console.log('Usuario agregado con éxito', response);
+
+                // Guardar en localStorage si está en el navegador
+                if (this.isBrowser()) {
+                  localStorage.setItem('loggedIn', 'true');
+                  localStorage.setItem('loggedUser', newUser.usuario);
+                  window.dispatchEvent(new Event('storage'));
+                }
+
+                // Redirigir a la página de inicio
+                this.router.navigate(['/index']);
+
+                // Limpiar el formulario
+                this.resetForm();
+                this.passwordMismatch = false;
+                this.userExistsError = '';
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Éxito',
+                  text: 'Usuario registrado con éxito.',
+                });
+              },
+              (error) => {
+                console.error('Error al agregar usuario', error);
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'Ocurrió un error al registrar el usuario.',
+                });
+              }
+            );
+          }
+        },
+        (error) => {
+          console.error('Error al verificar usuario', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Ocurrió un error al verificar el usuario.',
+          });
+        }
+      );
     } else {
       this.passwordMismatch = false;
       this.showValidationErrors();
     }
+  }
+
+  isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
 
   isFormValid(): boolean {
@@ -87,7 +157,8 @@ export class RegistrarComponent {
         'Usuario es requerido y debe tener al menos 3 caracteres.\n';
     }
     if (!this.isPhoneValid(this.phone)) {
-      errorMessage += 'Teléfono es requerido y debe tener 8 dígitos.\n';
+      errorMessage +=
+        'Teléfono es requerido y debe tener exactamente 8 dígitos.\n';
     }
     if (!this.firstname) {
       errorMessage += 'Nombre es requerido.\n';
@@ -112,6 +183,10 @@ export class RegistrarComponent {
       errorMessage += 'Confirmar contraseña es requerida.\n';
     }
 
-    alert(errorMessage);
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: errorMessage,
+    });
   }
 }

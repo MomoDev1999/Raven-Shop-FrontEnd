@@ -7,7 +7,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms'; // Añadido FormsModule
+import { FirebaseService } from '../../services/firebase.service';
+import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -20,16 +22,11 @@ export class LoginComponent {
   loginForm: FormGroup;
   loginError: boolean = false;
 
-  users = [
-    { username: 'user1', password: 'password1' },
-    { username: 'user2', password: 'password2' },
-    { username: 'user', password: 'password' },
-  ];
-
-  selectedUsername: string = '';
-  selectedPassword: string = '';
-
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private firebaseService: FirebaseService
+  ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -37,30 +34,57 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log('Formulario enviado'); // Para depurar
+    console.log('Formulario enviado');
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
-      console.log('Formulario válido', username, password); // Para depurar
+      console.log('Formulario válido', username, password);
 
-      const user = this.users.find(
-        (u) => u.username === username && u.password === password
-      );
-      if (user) {
-        localStorage.setItem('loggedIn', 'true');
-        window.dispatchEvent(new Event('storage'));
-        this.router.navigate(['/index']);
-      } else {
-        this.loginError = true;
-        alert('Usuario o contraseña incorrectos.');
-      }
+      this.firebaseService.getUsers().subscribe((users) => {
+        const user = users.find(
+          (u) => u.usuario === username && u.password === password
+        );
+        if (user) {
+          if (this.isBrowser()) {
+            localStorage.setItem('loggedIn', 'true');
+            localStorage.setItem('loggedUser', user.usuario);
+            window.dispatchEvent(new Event('storage'));
+          }
+          Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'Has iniciado sesión correctamente.',
+          }).then(() => {
+            this.router.navigate(['/index']);
+          });
+        } else {
+          this.loginError = true;
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Usuario o contraseña incorrectos.',
+          });
+        }
+      });
     } else {
       if (this.loginForm.controls['username'].invalid) {
-        alert('El campo de usuario es obligatorio.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'El campo de usuario es obligatorio.',
+        });
       }
       if (this.loginForm.controls['password'].invalid) {
-        alert('El campo de contraseña es obligatorio.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'El campo de contraseña es obligatorio.',
+        });
       }
       this.loginError = true;
     }
+  }
+
+  isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
 }

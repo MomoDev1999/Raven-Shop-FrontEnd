@@ -8,18 +8,8 @@
         id="login-username"
         formControlName="username"
         class="form-control"
-        [(ngModel)]="selectedUsername"
         required
       />
-      <div
-        *ngIf="
-          loginForm.get('username')?.invalid &&
-          loginForm.get('username')?.touched
-        "
-        class="error-message"
-      >
-        Usuario es requerido.
-      </div>
     </div>
     <div class="form-group">
       <label for="login-password">Contraseña</label>
@@ -28,18 +18,8 @@
         id="login-password"
         formControlName="password"
         class="form-control"
-        [(ngModel)]="selectedPassword"
         required
       />
-      <div
-        *ngIf="
-          loginForm.get('password')?.invalid &&
-          loginForm.get('password')?.touched
-        "
-        class="error-message"
-      >
-        Contraseña es requerida.
-      </div>
     </div>
 
     <button type="submit" class="btn btn-primary w-100" id="login-btn">
