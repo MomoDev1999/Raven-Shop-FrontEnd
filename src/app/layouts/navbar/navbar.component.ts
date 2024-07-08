@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CarritoService } from '../../services/carrito.service';
+import Swal from 'sweetalert2';
 
 interface CarritoItem {
   id: number;
@@ -43,17 +44,23 @@ export class NavbarComponent implements OnInit {
       }
     );
 
-    this.checkLoginStatus();
-    this.cargarCarrito();
-
-    window.addEventListener('storage', () => {
+    if (this.isBrowser()) {
       this.checkLoginStatus();
       this.cargarCarrito();
-    });
+
+      window.addEventListener('storage', () => {
+        this.checkLoginStatus();
+        this.cargarCarrito();
+      });
+    }
 
     this.carritoService.carrito$.subscribe((carrito) => {
       this.carrito = carrito;
     });
+  }
+
+  isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
 
   buscarPorCategoria(category: string): void {
@@ -67,23 +74,37 @@ export class NavbarComponent implements OnInit {
   }
 
   cerrarSesion() {
-    localStorage.setItem('loggedIn', 'false');
-    this.checkLoginStatus();
-    this.router.navigate(['/index']);
+    if (this.isBrowser()) {
+      localStorage.setItem('loggedIn', 'false');
+      localStorage.setItem('loggedUser', 'username');
+      this.checkLoginStatus();
+      this.router.navigate(['/index']);
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Sesión cerrada exitosamente',
+      });
+    }
   }
 
   checkLoginStatus() {
-    const status = localStorage.getItem('loggedIn');
-    this.loggedIn = status === 'true';
+    if (this.isBrowser()) {
+      const status = localStorage.getItem('loggedIn');
+      this.loggedIn = status === 'true';
+    }
   }
 
   cargarCarrito() {
-    this.carritoService.cargarCarrito();
-    window.dispatchEvent(new Event('storage'));
+    if (this.isBrowser()) {
+      this.carritoService.cargarCarrito();
+      window.dispatchEvent(new Event('storage'));
+    }
   }
 
   eliminarDelCarrito(item: CarritoItem) {
-    this.carritoService.eliminarDelCarrito(item);
-    window.dispatchEvent(new Event('storage'));
+    if (this.isBrowser()) {
+      this.carritoService.eliminarDelCarrito(item);
+      window.dispatchEvent(new Event('storage'));
+    }
   }
 }

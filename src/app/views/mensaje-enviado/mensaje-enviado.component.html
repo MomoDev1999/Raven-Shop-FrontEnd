@@ -1,10 +1,7 @@
+<!-- mensaje-enviado.component.html -->
 <div id="mensaje-enviado">
   <h2 class="text-center">Código de Recuperación</h2>
-  <form
-    id="codigo-recuperacion-form"
-    class="row"
-    onsubmit="return validarCodigo()"
-  >
+  <form id="codigo-recuperacion-form" class="row" (ngSubmit)="validarCodigo()">
     <div class="form-group col-md-12 text-center">
       <p>Se ha enviado un código de recuperación a tu cuenta</p>
       <label for="codigo-recuperacion">Ingresar Código</label>
@@ -12,6 +9,8 @@
         type="text"
         id="codigo-recuperacion"
         class="form-control text-center"
+        [(ngModel)]="codigo"
+        name="codigo"
         required
         pattern="[0-9]{5}"
         maxlength="5"

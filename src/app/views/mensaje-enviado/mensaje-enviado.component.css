@@ -1,0 +1,25 @@
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+#recuperar-password-form,
+#codigo-recuperacion-form {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.invalid-feedback {
+  display: none;
+  color: red;
+}
+.form-control:invalid ~ .invalid-feedback {
+  display: block;
+}

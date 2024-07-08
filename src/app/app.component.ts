@@ -19,11 +19,13 @@ import { CarritoComponent } from './views/carrito/carrito.component';
 import { MisComprasComponent } from './views/mis-compras/mis-compras.component';
 import { ProductService } from './services/product.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    SweetAlert2Module,
     ReactiveFormsModule,
     HttpClientModule,
     RouterOutlet,
@@ -48,8 +50,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'MiTienda';
-
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
