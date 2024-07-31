@@ -42,4 +42,16 @@ export class IndexComponent implements OnInit {
       quantity: 1,
     });
   }
+
+  formatPrice(price: string): string {
+    return Number(price).toLocaleString('es-CL');
+  }
+
+  getStars(rating: number): number[] {
+    return Array(Math.floor(rating)).fill(0);
+  }
+
+  getEmptyStars(rating: number): number[] {
+    return rating % 1 > 0 ? [0] : [];
+  }
 }

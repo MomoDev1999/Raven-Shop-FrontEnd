@@ -1,39 +1,46 @@
+/* Agrega las esferas decorativas en el footer */
 #footer {
-  background: linear-gradient(#807f7fe6, rgba(110, 110, 110, 0.9)),
-    url("../../../assets/img/img_4.jpg");
+  position: relative;
+  background-color: black;
+  padding: 20px;
+  color: #ffffff;
+  overflow: hidden; /* Para que las esferas no salgan del footer */
 }
 
 #footer h5 {
-  color: #facfad; /* Color del título */
-  margin-bottom: 10px; /* Espaciado inferior del título */
+  color: #facfad;
+  margin-bottom: 10px;
   margin-top: 10px;
+  font-size: 14px; /* Tamaño de fuente reducido para los h5 */
 }
 
 #footer p,
 #footer ul {
-  margin-bottom: 10px; /* Espaciado inferior entre párrafos y listas */
-  color: #ffffff; /* Color de los enlaces */
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 12px; /* Tamaño de fuente reducido para los p */
 }
 
 #footer a {
-  color: #facfad; /* Color de los enlaces */
+  color: #ffffff;
+  font-size: 12px; /* Tamaño de fuente reducido para los a */
 }
 
 #footer a:hover {
-  color: #f8bd7f; /* Color al pasar el mouse sobre los enlaces */
+  color: #f8bd7f;
 }
 
 #footer ul {
-  padding-left: 0; /* Elimina el padding izquierdo de la lista */
-  list-style: none; /* Elimina los estilos de la lista */
+  padding-left: 0;
+  list-style: none;
 }
 
 #footer ul li {
-  margin-bottom: 5px; /* Espaciado entre elementos de la lista */
+  margin-bottom: 5px;
 }
 
 .footer-container {
-  position: absolute;
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -41,4 +48,79 @@
 
 .footer-content {
   flex: 1;
+}
+
+.register-section {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: #ffffff;
+  margin-top: 20px;
+}
+
+.register-section button {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.register-section img {
+  width: 150px; /* Ajusta según el tamaño del logo */
+  margin: 20px 0;
+}
+
+.social-icons {
+  display: flex; /* Utiliza Flexbox para alinear los íconos en línea */
+  gap: 15px; /* Espacio entre los íconos (ajusta el valor según tu preferencia) */
+}
+
+.social-icons a {
+  text-decoration: none; /* Elimina el subrayado de los enlaces */
+  color: inherit; /* Mantiene el color de los íconos */
+}
+
+.social-icons i {
+  font-size: 24px; /* Tamaño de los íconos (ajusta según tu diseño) */
+  transition: color 0.3s; /* Transición suave para el cambio de color */
+}
+
+.social-icons i:hover {
+  color: #facfad; /* Cambia el color del ícono al pasar el cursor (ajusta el color según tu preferencia) */
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px; /* Espaciado interno del botón */
+  font-size: 16px; /* Tamaño de la fuente */
+  font-weight: bold; /* Peso de la fuente */
+  text-align: center;
+  text-decoration: none; /* Elimina el subrayado */
+  border-radius: 20px; /* Bordes redondeados */
+  border: 2px solid transparent; /* Borde inicial transparente */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  transition: all 0.3s ease; /* Transición suave para todos los efectos */
+}
+
+.btn-white {
+  background-color: #ffffff; /* Fondo blanco */
+  color: #000000; /* Color del texto negro */
+  border-color: #000000; /* Color del borde negro */
+}
+
+.btn-white:hover {
+  background-color: #f8f8f8; /* Fondo ligeramente gris al pasar el cursor */
+  color: #000000; /* Color del texto (opcional, se mantiene negro) */
+  border-color: #333333; /* Borde más oscuro al pasar el cursor */
+}
+
+.btn-white:active {
+  background-color: #e0e0e0; /* Fondo aún más oscuro cuando el botón es presionado */
+  border-color: #333333; /* Borde más oscuro cuando el botón es presionado */
+}
+
+img {
+  width: 100%;
 }

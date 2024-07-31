@@ -28,6 +28,12 @@ export class NavbarComponent implements OnInit {
   carrito: CarritoItem[] = [];
   searchTerm: string = '';
 
+  mujerItems: string[] = ['Item1', 'Item2', 'Item3'];
+  hombreItems: string[] = ['Item4', 'Item5', 'Item6'];
+  calzadoItems: string[] = ['Item7', 'Item8', 'Item9'];
+  accesoriosItems: string[] = ['Item10', 'Item11', 'Item12'];
+  preventaItems: string[] = ['Item13', 'Item14', 'Item15'];
+
   constructor(
     private categoriesService: CategoriesService,
     private router: Router,

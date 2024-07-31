@@ -1,45 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap");
+
+.oswald {
+  font-family: "Oswald", sans-serif;
+}
+
 .card {
-  border: none;
-  height: 300px;
+  border-radius: 5px; /* Bordes redondeados */
+  overflow: hidden;
+  height: 450px; /* Ajustar altura automáticamente */
+  position: relative; /* Necesario para el footer */
+  background-color: #ebe9e9;
 }
 
 .card-title {
-  color: #333333; /* Color del título de la tarjeta */
+  color: #333333;
+  font-size: 1.2rem; /* Ajustar tamaño del título */
+  margin: 0.5rem 0;
 }
 
 .card-text {
-  color: #555555; /* Color del texto de la tarjeta */
+  color: #555555;
+  font-size: 0.9rem; /* Ajustar tamaño del texto */
+}
+
+.card-price {
+  color: #000;
+  font-size: 1rem; /* Ajustar tamaño del precio */
+  font-weight: bold;
 }
 
 .card-img-top {
-  height: 150px;
-  width: 100%;
-  object-fit: contain;
+  height: 180px; /* Ajustar altura de la imagen */
+  width: 80%;
+  object-fit: contain; /* Cubrir completamente el contenedor */
 }
 
 .card-footer {
-  position: absolute;
-  bottom: 0;
   width: 100%;
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.8
-  ); /* Ajusta el color de fondo según lo desees */
+  background-color: rgba(255, 255, 255, 0.8); /* Ajustar el color de fondo */
   padding: 10px;
-}
-
-.carousel-inner img {
-  width: auto;
-  max-height: 100%;
-  max-width: 100%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .product-title {
   white-space: pre-wrap;
+  font-size: 0.8rem;
   overflow: hidden;
+}
+
+.ver-mas-btn {
+  background-color: #000; /* Botón negro */
+  color: #fff; /* Texto blanco */
+  border: none;
+  padding: 10px 20px; /* Añadir padding */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+.ver-mas-btn:hover {
+  background-color: #333; /* Cambiar color al pasar el mouse */
+}
+
+.rating {
+  color: #ffd700; /* Color dorado para las estrellas */
+  font-size: 1.2rem; /* Tamaño de las estrellas */
+}
+
+.rating i {
+  margin: 0 2px; /* Espaciado entre las estrellas */
 }

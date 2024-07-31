@@ -1,7 +1,12 @@
-<div id="navbar" class="mb-3">
-  <nav class="navbar navbar-expand-lg navbar-dark">
+<div id="navbar">
+  <div class="top-bar">
+    Envíos pueden demorar de 2 a 5 días hábiles en Región Metropolitana
+  </div>
+  <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand mx-3" [routerLink]="['/index']">Shop</a>
+      <div class="navbar-brand-container">
+        <a class="navbar-brand" [routerLink]="['/index']">Raven</a>
+      </div>
       <button
         class="navbar-toggler"
         type="button"
@@ -11,15 +16,10 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="bi bi-list"></span>
+        <span class="fas fa-bars"></span>
       </button>
-
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/index']">Inicio</a>
-          </li>
-
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -28,8 +28,8 @@
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              >Categorías</a
-            >
+              >Categorías <i class="fas fa-chevron-down"></i
+            ></a>
             <ul
               class="dropdown-menu"
               aria-labelledby="categoriesDropdown"
@@ -45,117 +45,196 @@
             </ul>
           </li>
 
-          <li class="nav-item" *ngIf="!loggedIn">
-            <a class="nav-link" [routerLink]="['/registrar']">Crea tu cuenta</a>
-          </li>
-          <li class="nav-item" *ngIf="!loggedIn">
-            <a class="nav-link" [routerLink]="['/login']">Ingresa</a>
-          </li>
-
-          <li class="nav-item" *ngIf="loggedIn">
-            <button class="nav-link" (click)="cerrarSesion()">
-              Cerrar sesión
-            </button>
-          </li>
-          <li class="nav-item" *ngIf="loggedIn">
-            <a class="nav-link" [routerLink]="['/editar-perfil']">
-              Editar perfil</a
-            >
-          </li>
-
-          <li class="nav-item" *ngIf="loggedIn">
-            <a class="nav-link" [routerLink]="['/mis-compras']">Mis compras</a>
-          </li>
-
-          <!-- Carrito -->
-          <li class="nav-item dropdown custom-dropdown">
+          <!-- Mujer -->
+          <li class="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle custom-dropdown-toggle"
+              class="nav-link dropdown-toggle"
               href="#"
+              id="mujerDropdown"
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              id="carritoDropdown"
-            >
-              <i class="bi bi-cart"></i> Carrito
-              <span class="badge bg-primary custom-badge">{{
-                carrito.length
-              }}</span>
-            </a>
+              >Mujer <i class="fas fa-chevron-down"></i
+            ></a>
             <ul
-              class="dropdown-menu dropdown-menu-end custom-dropdown-menu"
-              aria-labelledby="carritoDropdown"
-              id="carritoMenu"
+              class="dropdown-menu"
+              aria-labelledby="mujerDropdown"
+              id="mujerMenu"
             >
-              <li class="dropdown-header custom-dropdown-header">
-                Productos en el carrito
-              </li>
-              <li *ngFor="let item of carrito" class="custom-item">
-                <div class="row g-0 align-items-center">
-                  <div class="col-3">
-                    <img
-                      [src]="item.image"
-                      class="img-fluid custom-item-image"
-                      [alt]="item.name"
-                    />
-                  </div>
-                  <div class="col-6 text-center">
-                    <h6 class="dropdown-item-title custom-item-title">
-                      {{ item.name }}
-                    </h6>
-                    <p class="dropdown-item-price custom-item-price">
-                      {{ item.price | currency }}
-                    </p>
-                    <p class="dropdown-item-quantity text-bold">
-                      x{{ item.quantity }}
-                    </p>
-                  </div>
-                  <div class="col-3">
-                    <button
-                      type="button"
-                      class="btn btn-sm btn-danger custom-btn"
-                      (click)="eliminarDelCarrito(item)"
-                    >
-                      <i class="bi bi-trash"></i>
-                    </button>
-                  </div>
-                </div>
-              </li>
-              <li
-                *ngIf="carrito.length === 0"
-                class="dropdown-item text-center"
-              >
-                No hay productos en el carrito.
-              </li>
-              <li><hr class="dropdown-divider custom-divider" /></li>
-
-              <li class="dropdown-footer custom-footer">
-                <div class="d-grid">
-                  <a
-                    [routerLink]="['/carrito']"
-                    class="btn btn-primary custom-btn mx-3"
-                    id="ver-carrito-btn"
-                  >
-                    Ver Carrito
-                  </a>
-                </div>
+              <li *ngFor="let item of mujerItems">
+                <a class="dropdown-item" (click)="buscarPorCategoria(item)">{{
+                  item
+                }}</a>
               </li>
             </ul>
           </li>
 
-          <!-- Buscador -->
-          <li class="nav-item mx-3">
-            <form class="input-group" (submit)="buscarProductos()">
-              <input
-                type="text"
-                name="search"
-                id="search"
-                class="form-control"
-                placeholder="Buscar productos..."
-                [(ngModel)]="searchTerm"
-              />
-              <button type="submit" class="btn btn-primary">Buscar</button>
-            </form>
+          <!-- Hombre -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="hombreDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              >Hombre <i class="fas fa-chevron-down"></i
+            ></a>
+            <ul
+              class="dropdown-menu"
+              aria-labelledby="hombreDropdown"
+              id="hombreMenu"
+            >
+              <li *ngFor="let item of hombreItems">
+                <a class="dropdown-item" (click)="buscarPorCategoria(item)">{{
+                  item
+                }}</a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Calzado -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="calzadoDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              >Calzado <i class="fas fa-chevron-down"></i
+            ></a>
+            <ul
+              class="dropdown-menu"
+              aria-labelledby="calzadoDropdown"
+              id="calzadoMenu"
+            >
+              <li *ngFor="let item of calzadoItems">
+                <a class="dropdown-item" (click)="buscarPorCategoria(item)">{{
+                  item
+                }}</a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Accesorios -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="accesoriosDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              >Accesorios <i class="fas fa-chevron-down"></i
+            ></a>
+            <ul
+              class="dropdown-menu"
+              aria-labelledby="accesoriosDropdown"
+              id="accesoriosMenu"
+            >
+              <li *ngFor="let item of accesoriosItems">
+                <a class="dropdown-item" (click)="buscarPorCategoria(item)">{{
+                  item
+                }}</a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Preventa -->
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="preventaDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              >Preventa <i class="fas fa-chevron-down"></i
+            ></a>
+            <ul
+              class="dropdown-menu"
+              aria-labelledby="preventaDropdown"
+              id="preventaMenu"
+            >
+              <li *ngFor="let item of preventaItems">
+                <a class="dropdown-item" (click)="buscarPorCategoria(item)">{{
+                  item
+                }}</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div class="search-container">
+          <form class="input-group" (submit)="buscarProductos()">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              class="form-control search-input"
+              placeholder=" Búsqueda..."
+              [(ngModel)]="searchTerm"
+            />
+            <button type="submit" class="btn search-btn">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </div>
+
+        <ul class="navbar-nav icons">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle nav-link-icon"
+              href="#"
+              id="userDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="fas fa-user"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+              <li class="nav-item">
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['/registrar']"
+                  *ngIf="!loggedIn"
+                  >Crea tu cuenta</a
+                >
+              </li>
+              <li class="nav-item" *ngIf="!loggedIn">
+                <a class="dropdown-item" [routerLink]="['/login']">Ingresa</a>
+              </li>
+
+              <li class="nav-item" *ngIf="loggedIn">
+                <a class="dropdown-item" (click)="cerrarSesion()"
+                  >Cerrar sesión</a
+                >
+              </li>
+              <li class="nav-item" *ngIf="loggedIn">
+                <a class="dropdown-item" [routerLink]="['/editar-perfil']"
+                  >Editar perfil</a
+                >
+              </li>
+              <li class="nav-item" *ngIf="loggedIn">
+                <a class="dropdown-item" [routerLink]="['/mis-compras']"
+                  >Mis compras</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item position-relative">
+            <a class="nav-link nav-link-icon" [routerLink]="['/carrito']">
+              <i class="fas fa-shopping-bag"></i>
+              <span class="badge bg-primary custom-badge">{{
+                carrito.length
+              }}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link-icon" href="#">
+              <i class="fas fa-star"></i>
+            </a>
           </li>
         </ul>
       </div>

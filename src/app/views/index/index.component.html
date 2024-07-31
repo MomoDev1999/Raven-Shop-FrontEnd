@@ -57,44 +57,186 @@
     </button>
   </div>
 
-  <div class="container mt-3">
+  <div class="container">
+    <h1 class="text-center oswald mt-3 mb-3">TENDENCIAS DEL MOMENTO</h1>
     <div class="row" id="product-list">
-      <div class="col-md-4" *ngFor="let producto of productos">
-        <div class="card mb-4 shadow-sm">
+      <div class="col-md-3" *ngFor="let producto of productos">
+        <div class="card mb-4 shadow-sm align-items-center">
           <img
             src="{{ producto.image }}"
             class="card-img-top mt-3"
             alt="{{ producto.title }}"
           />
-          <div class="card-body">
-            <h5
-              class="card-title text-center product-title"
-              title="{{ producto.title }}"
-            >
+          <div class="card-body text-center">
+            <p class="card-text">{{ producto.brand }}</p>
+            <h5 class="card-title product-title" title="{{ producto.title }}">
               {{ producto.title }}
             </h5>
-          </div>
-          <div class="card-footer">
-            <div class="d-flex justify-content-between align-items-center">
-              <button
-                type="button"
-                class="btn btn-sm btn-outline-secondary ver-mas-btn"
-                (click)="verMas(producto.id)"
-              >
-                Ver más
-              </button>
-              <p class="card-text">{{ producto.price }}</p>
-              <button
-                type="button"
-                class="btn btn-sm btn-primary"
-                (click)="agregarAlCarrito(producto)"
-              >
-                Agregar al carrito
-              </button>
+            <p class="card-price">$ {{ formatPrice(producto.price) }}</p>
+
+            <div class="rating">
+              <span *ngFor="let star of getStars(producto.rating.rate)">
+                <i class="bi bi-star-fill"></i>
+              </span>
+              <span *ngFor="let star of getEmptyStars(producto.rating.rate)">
+                <i class="bi bi-star"></i>
+              </span>
             </div>
+          </div>
+          <div class="card-footer text-center btn-group">
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-secondary ver-mas-btn"
+              (click)="verMas(producto.id)"
+            >
+              Ver Producto
+            </button>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Testimonios -->
+    <div
+      id="testimonialCarousel"
+      class="carousel slide mb-3 mt-3"
+      data-bs-ride="carousel"
+    >
+      <h1 class="text-center oswald mb-3">RESEÑAS DE NUESTROS CLIENTES</h1>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="testimonial text-center">
+                <p class="testimonial-review">
+                  "Excelente servicio y productos de alta calidad. Muy
+                  satisfecho con mi compra."
+                </p>
+                <div class="testimonial-rating">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-half"></i>
+                </div>
+                <h5 class="testimonial-name">Juan Pérez</h5>
+                <p class="testimonial-date">10 de Julio, 2024</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="testimonial text-center">
+                <p class="testimonial-review">
+                  "Entrega rápida y atención al cliente excepcional.
+                  ¡Recomendado!"
+                </p>
+                <div class="testimonial-rating">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                </div>
+                <h5 class="testimonial-name">María López</h5>
+                <p class="testimonial-date">5 de Junio, 2024</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="testimonial text-center">
+                <p class="testimonial-review">
+                  "Gran variedad de productos y precios competitivos. Muy
+                  satisfecho."
+                </p>
+                <div class="testimonial-rating">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star"></i>
+                  <i class="bi bi-star"></i>
+                </div>
+                <h5 class="testimonial-name">Carlos González</h5>
+                <p class="testimonial-date">20 de Mayo, 2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="testimonial text-center">
+                <p class="testimonial-review">
+                  "Calidad y precio insuperables. Volveré a comprar aquí."
+                </p>
+                <div class="testimonial-rating">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star"></i>
+                </div>
+                <h5 class="testimonial-name">Laura Méndez</h5>
+                <p class="testimonial-date">15 de Marzo, 2024</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="testimonial text-center">
+                <p class="testimonial-review">
+                  "Muy buena atención y productos de calidad. Recomendado."
+                </p>
+                <div class="testimonial-rating">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-half"></i>
+                  <i class="bi bi-star"></i>
+                </div>
+                <h5 class="testimonial-name">Pedro Gómez</h5>
+                <p class="testimonial-date">30 de Abril, 2024</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="testimonial text-center">
+                <p class="testimonial-review">
+                  "Muy satisfecho con mi compra. Atención al cliente excelente."
+                </p>
+                <div class="testimonial-rating">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                </div>
+                <h5 class="testimonial-name">Ana Rodríguez</h5>
+                <p class="testimonial-date">12 de Febrero, 2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#testimonialCarousel"
+        data-bs-slide="prev"
+      >
+        <span
+          class="carousel-control-prev-icon carousel-control-prev-icon-black"
+          aria-hidden="true"
+        ></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#testimonialCarousel"
+        data-bs-slide="next"
+      >
+        <span
+          class="carousel-control-next-icon carousel-control-next-icon-black"
+          aria-hidden="true"
+        ></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <!-- Fin de Testimonios -->
   </div>
 </div>
