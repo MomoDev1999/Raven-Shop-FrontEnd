@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap");
+
+.oswald {
+  font-family: "Oswald", sans-serif;
+}
+
+.title {
+  font-size: 60px;
+  font-weight: bold;
+  font-family: "UnifrakturMaguntia", sans-serif;
+  color: white;
+}
+
+.raven-logo {
+  width: 150px;
+  height: auto;
+  border: 10px solid white; /* Ajusta el tamaño del borde según sea necesario */
+  border-radius: 50%; /* Hace que el borde sea circular */
+  padding: 5px; /* Espacio entre la imagen y el borde */
+  background-color: white; /* Color de fondo para asegurar que el borde sea visible */
+}

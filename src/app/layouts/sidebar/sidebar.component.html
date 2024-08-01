@@ -1,0 +1,25 @@
+<!-- sidebar.component.html -->
+<div
+  class="offcanvas offcanvas-end bg-dark text-secondary"
+  tabindex="-1"
+  id="offcanvasWithBothOptions"
+  aria-labelledby="offcanvasWithBothOptionsLabel"
+>
+  <div class="offcanvas-header d-flex justify-content-end">
+    <button
+      type="button"
+      class="btn-close btn-close-white"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="text-center">
+    <h1 class="title">Raven</h1>
+    <img src="../../../assets/img/raven-logo.png" alt="" class="raven-logo" />
+  </div>
+  <div class="offcanvas-body text-center mt-3">
+    <button class="btn btn-light oswald" [routerLink]="['/carrito']">
+      IR AL CARRITO
+    </button>
+  </div>
+</div>

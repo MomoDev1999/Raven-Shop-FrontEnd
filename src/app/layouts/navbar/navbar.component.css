@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap");
+
+.oswald {
+  font-family: "Oswald", sans-serif;
+}
 
 .top-bar {
   background-color: black;
@@ -34,7 +39,6 @@
 }
 
 .collapse.navbar-collapse {
-  display: flex;
   justify-content: space-between;
   align-items: center;
 }
@@ -63,8 +67,13 @@
   text-decoration: underline;
 }
 
-.dropdown-menu {
-  position: absolute;
+.dropdown-menu-center {
+  left: 50% !important;
+  transform: translateX(-50%);
+}
+
+.dropdown-menu-lg {
+  width: 250px;
 }
 
 .dropdown-toggle::after {
@@ -135,4 +144,16 @@
 .nav-link-icon {
   font-size: 24px;
   color: black;
+}
+
+.raven-logo {
+  width: 150px;
+  height: auto;
+}
+
+.enlace-registrar {
+  color: black;
+  text-decoration: underline; /* Subrayado */
+  text-decoration-thickness: 2px;
+  text-decoration-color: red; /* Color de la línea de subrayado */
 }

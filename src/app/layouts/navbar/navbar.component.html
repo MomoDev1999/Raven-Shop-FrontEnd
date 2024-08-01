@@ -2,7 +2,7 @@
   <div class="top-bar">
     Envíos pueden demorar de 2 a 5 días hábiles en Región Metropolitana
   </div>
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg text-center">
     <div class="container-fluid">
       <div class="navbar-brand-container">
         <a class="navbar-brand" [routerLink]="['/index']">Raven</a>
@@ -182,28 +182,44 @@
         </div>
 
         <ul class="navbar-nav icons">
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown-center dropdown">
             <a
               class="nav-link dropdown-toggle nav-link-icon"
               href="#"
               id="userDropdown"
               role="button"
               data-bs-toggle="dropdown"
+              data-bs-display="static"
               aria-expanded="false"
             >
               <i class="fas fa-user"></i>
             </a>
-            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-              <li class="nav-item">
-                <a
-                  class="dropdown-item"
-                  [routerLink]="['/registrar']"
-                  *ngIf="!loggedIn"
-                  >Crea tu cuenta</a
-                >
-              </li>
+            <ul
+              class="dropdown-menu dropdown-menu-lg dropdown-menu-center text-center"
+              aria-labelledby="userDropdown"
+            >
               <li class="nav-item" *ngIf="!loggedIn">
-                <a class="dropdown-item" [routerLink]="['/login']">Ingresa</a>
+                <img
+                  src="../../../assets/img/raven-logo.png"
+                  alt="logo"
+                  class="raven-logo"
+                />
+
+                <button
+                  class="btn btn-dark mt-3 mb-3 oswald"
+                  [routerLink]="['/login']"
+                >
+                  INICIAR SESIÓN
+                </button>
+
+                <p class="oswald">
+                  ¿No tienes una cuenta?
+                  <a
+                    class="oswald enlace-registrar"
+                    [routerLink]="['/registrar']"
+                    >REGÍSTRATE</a
+                  >
+                </p>
               </li>
 
               <li class="nav-item" *ngIf="loggedIn">
@@ -224,7 +240,13 @@
             </ul>
           </li>
           <li class="nav-item position-relative">
-            <a class="nav-link nav-link-icon" [routerLink]="['/carrito']">
+            <a
+              class="nav-link nav-link-icon"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasWithBothOptions"
+              aria-controls="offcanvasWithBothOptions"
+            >
               <i class="fas fa-shopping-bag"></i>
               <span class="badge bg-primary custom-badge">{{
                 carrito.length
