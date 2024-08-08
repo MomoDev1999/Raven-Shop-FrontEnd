@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap");
-
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap");
 
 .oswald {
@@ -7,17 +6,41 @@
 }
 
 .title {
-  font-size: 60px;
+  font-size: 50px;
   font-weight: bold;
   font-family: "UnifrakturMaguntia", sans-serif;
-  color: white;
+  color: black;
 }
 
 .raven-logo {
-  width: 150px;
+  width: 100px;
   height: auto;
-  border: 10px solid white; /* Ajusta el tamaño del borde según sea necesario */
-  border-radius: 50%; /* Hace que el borde sea circular */
-  padding: 5px; /* Espacio entre la imagen y el borde */
-  background-color: white; /* Color de fondo para asegurar que el borde sea visible */
+}
+
+.items-in-cart {
+  font-size: 13px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.item-details {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.item-image {
+  width: 50px;
+  height: auto;
 }

@@ -1,6 +1,5 @@
-<!-- sidebar.component.html -->
 <div
-  class="offcanvas offcanvas-end bg-dark text-secondary"
+  class="offcanvas offcanvas-end text-secondary"
   tabindex="-1"
   id="offcanvasWithBothOptions"
   aria-labelledby="offcanvasWithBothOptionsLabel"
@@ -8,7 +7,7 @@
   <div class="offcanvas-header d-flex justify-content-end">
     <button
       type="button"
-      class="btn-close btn-close-white"
+      class="btn-close"
       data-bs-dismiss="offcanvas"
       aria-label="Close"
     ></button>
@@ -18,7 +17,32 @@
     <img src="../../../assets/img/raven-logo.png" alt="" class="raven-logo" />
   </div>
   <div class="offcanvas-body text-center mt-3">
-    <button class="btn btn-light oswald" [routerLink]="['/carrito']">
+    <p>Carro ({{ cantidadTotal }})</p>
+    <div
+      *ngFor="let item of carrito"
+      class="item-container oswald items-in-cart"
+    >
+      <img [src]="item.image" alt="{{ item.name }}" class="item-image" />
+      <div class="item-details">
+        <p>{{ item.name }}</p>
+        <p>Talla x</p>
+        <p>{{ item.price | currency }}</p>
+      </div>
+      <div class="button-group">
+        <button class="btn btn-light" (click)="decrementQuantity(item)">
+          -
+        </button>
+        <button class="btn btn-light disabled">{{ item.quantity }}</button>
+        <button class="btn btn-light" (click)="incrementQuantity(item)">
+          +
+        </button>
+      </div>
+      <button class="btn btn-danger btn-sm" (click)="eliminarDelCarrito(item)">
+        Eliminar
+      </button>
+    </div>
+    <p>Total: {{ calcularTotal() | currency }}</p>
+    <button class="btn btn-dark oswald" [routerLink]="['/carrito']">
       IR AL CARRITO
     </button>
   </div>

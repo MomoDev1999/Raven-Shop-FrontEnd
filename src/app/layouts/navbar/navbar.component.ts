@@ -23,6 +23,7 @@ interface CarritoItem {
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  cantidadTotal: number = 0;
   categories: string[] = [];
   loggedIn: boolean = false;
   carrito: CarritoItem[] = [];
@@ -62,6 +63,7 @@ export class NavbarComponent implements OnInit {
 
     this.carritoService.carrito$.subscribe((carrito) => {
       this.carrito = carrito;
+      this.cantidadTotal = this.carritoService.calcularCantidadTotal();
     });
   }
 
@@ -112,5 +114,9 @@ export class NavbarComponent implements OnInit {
       this.carritoService.eliminarDelCarrito(item);
       window.dispatchEvent(new Event('storage'));
     }
+  }
+
+  calcularTotal(): number {
+    return this.carritoService.calcularTotal();
   }
 }
