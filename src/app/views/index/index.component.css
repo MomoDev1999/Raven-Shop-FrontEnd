@@ -83,7 +83,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%; /* Para que cada testimonial se estire al tamaño del contenedor */
+  height: 300px; /* Para que cada testimonial se estire al tamaño del contenedor */
 }
 
 .carousel-item .row {

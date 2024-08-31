@@ -121,6 +121,26 @@
   border-color: #333333; /* Borde más oscuro cuando el botón es presionado */
 }
 
-img {
+/* img {
   width: 100%;
+} */
+
+#mario-container {
+  position: absolute; /* Posiciona a Mario dentro del contenedor relativo */
+  bottom: 0; /* Mario camina en la parte inferior del contenedor */
+  left: -100px; /* Inicia fuera de la pantalla a la izquierda */
+  animation: walkMario 10s linear infinite;
+}
+
+#mario-container img {
+  height: 100px; /* Ajusta el tamaño del GIF */
+}
+
+@keyframes walkMario {
+  0% {
+    left: -100px;
+  }
+  100% {
+    left: 100%;
+  }
 }

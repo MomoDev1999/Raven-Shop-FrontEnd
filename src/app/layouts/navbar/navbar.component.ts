@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 
 interface CarritoItem {
   id: number;
-  name: string;
+  title: string;
   price: number;
   quantity: number;
   image: string;

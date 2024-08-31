@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { FirebaseService } from '../../services/firebase.service';
+import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
+import { LoginService } from '../../services/login.service'; // Importar el nuevo servicio
 
 @Component({
   selector: 'app-registrar',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './registrar.component.html',
   styleUrls: ['./registrar.component.css'],
 })
@@ -25,9 +25,12 @@ export class RegistrarComponent {
   passwordMismatch: boolean = false;
   userExistsError: string = '';
 
+  acceptedTerms = false;
+  acceptedPromotions = false;
+
   constructor(
     private router: Router,
-    private firebaseService: FirebaseService
+    private loginService: LoginService // Usar el nuevo servicio
   ) {}
 
   onSubmit() {
@@ -43,33 +46,34 @@ export class RegistrarComponent {
       }
 
       const newUser = {
-        usuario: this.username,
-        telefono: this.phone,
-        nombre: this.firstname,
-        apellido: this.lastname,
-        fecha_nacimiento: this.birthdate,
-        correo: this.email,
-        direccion: this.address,
+        user: this.username, // Cambiado a 'user'
+        phone: this.phone, // Cambiado a 'phone'
+        name: this.firstname, // Cambiado a 'name'
+        lastname: this.lastname, // Cambiado a 'lastname'
+        birthdate: this.birthdate, // Cambiado a 'birthdate'
+        email: this.email, // Cambiado a 'email'
+        address: this.address, // Cambiado a 'address'
         password: this.password,
       };
 
-      this.firebaseService.userExists(this.email, this.username).subscribe(
-        (exists) => {
-          if (exists) {
+      this.loginService.userExists(this.email, this.username).subscribe(
+        (response) => {
+          if (response.exists) {
+            // Verificar si `exists` es true
             Swal.fire({
               icon: 'error',
               title: 'Error',
               text: 'El usuario o el correo electrónico ya están registrados.',
             });
           } else {
-            this.firebaseService.addUser(newUser).subscribe(
+            this.loginService.addUser(newUser).subscribe(
               (response) => {
                 console.log('Usuario agregado con éxito', response);
 
                 // Guardar en localStorage si está en el navegador
                 if (this.isBrowser()) {
                   localStorage.setItem('loggedIn', 'true');
-                  localStorage.setItem('loggedUser', newUser.usuario);
+                  localStorage.setItem('loggedUser', newUser.user);
                   window.dispatchEvent(new Event('storage'));
                 }
 
@@ -179,8 +183,9 @@ export class RegistrarComponent {
       errorMessage +=
         'Contraseña es requerida y debe tener al menos 6 caracteres.\n';
     }
-    if (!this.confirmPassword) {
-      errorMessage += 'Confirmar contraseña es requerida.\n';
+    if (this.password !== this.confirmPassword) {
+      errorMessage +=
+        'Confirmar contraseña debe coincidir con la contraseña.\n';
     }
 
     Swal.fire({

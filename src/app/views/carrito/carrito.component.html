@@ -1,47 +1,68 @@
-<div id="carrito" class="cart-container container mb-3">
+<div id="carrito" class="container mb-4">
   <div class="row">
-    <div class="col-md-8 mx-auto">
-      <h2 class="text-center mb-4">Tu Carrito de Compras</h2>
+    <div class="col-md-10 mx-auto">
+      <h2 class="text-center mb-3 mt-3 oswald">MI CARRITO DE COMPRAS</h2>
 
       <div *ngIf="carrito.length > 0; else emptyCart">
-        <div *ngFor="let item of carrito" class="cart-item">
-          <div class="row g-0 align-items-center">
-            <div class="col-md-4">
-              <img
-                [src]="item.image"
-                class="cart-item-image img-fluid"
-                [alt]="item.name"
-              />
-            </div>
-            <div class="col-md-8">
-              <div class="cart-item-details">
-                <h5 class="cart-item-title">{{ item.name }}</h5>
-                <p class="cart-item-price">{{ item.price | currency }}</p>
-                <p class="cart-item-quantity">Cantidad: {{ item.quantity }}</p>
-                <button
-                  type="button"
-                  class="btn btn-sm btn-danger"
-                  (click)="eliminarDelCarrito(item)"
-                >
-                  <i class="bi bi-trash"></i>
-                </button>
+        <div class="row oswald">
+          <div class="col-md-12 mb-4" *ngFor="let item of carrito">
+            <div class="card cart-item-card d-flex flex-row align-items-center">
+              <a (click)="verMas(item.id)">
+                <img
+                  [src]="item.image"
+                  class="cart-item-image"
+                  [alt]="item.title"
+                />
+              </a>
+              <div class="card-body">
+                <h5 class="card-title">{{ item.title }}</h5>
+                <p class="card-text">Precio: {{ item.price | currency }}</p>
+                <p class="card-text">
+                  Total: {{ item.price * item.quantity | currency }}
+                </p>
+                <div class="cart-item-quantity button-group mb-3">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-dark"
+                    (click)="decrementarCantidad(item)"
+                  >
+                    -
+                  </button>
+                  <button class="btn btn-sm btn-light disabled">
+                    {{ item.quantity }}
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-dark"
+                    (click)="incrementarCantidad(item)"
+                  >
+                    +
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-sm oswald"
+                    (click)="eliminarDelCarrito(item)"
+                  >
+                    <i class="fas fa-trash"></i> Eliminar
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="cart-buttons text-center mt-4">
-          <button class="btn btn-primary btn-checkout me-3">
-            Realizar Compra
-          </button>
-          <button class="btn btn-danger btn-clear" (click)="vaciarCarrito()">
+        <div class="cart-summary text-end mt-4 oswald">
+          <p><strong>Total:</strong> {{ calcularTotal() | currency }}</p>
+          <button class="btn btn-dark me-3">Realizar Compra</button>
+          <button class="btn btn-danger" (click)="vaciarCarrito()">
             Vaciar Carrito
           </button>
         </div>
       </div>
 
       <ng-template #emptyCart>
-        <p class="text-center">No hay productos en el carrito.</p>
+        <p class="text-center text-muted">No hay productos en el carrito.</p>
       </ng-template>
     </div>
   </div>

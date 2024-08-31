@@ -1,5 +1,5 @@
 <div id="login">
-  <h2 class="text-center">Ingresar</h2>
+  <h2 class="text-center">Iniciar Sesión</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="login-form">
     <div class="form-group">
       <label for="login-username">Usuario</label>
@@ -7,7 +7,8 @@
         type="text"
         id="login-username"
         formControlName="username"
-        class="form-control"
+        class="form-control mt-2"
+        placeholder="Email o usuario"
         required
       />
     </div>
@@ -17,32 +18,23 @@
         type="password"
         id="login-password"
         formControlName="password"
-        class="form-control"
+        class="form-control mt-2"
+        placeholder="**************"
         required
       />
     </div>
 
-    <button type="submit" class="btn btn-primary w-100" id="login-btn">
+    <button type="submit" class="btn btn-dark w-100" id="login-btn">
       Ingresar
     </button>
 
-    <button
-      type="button"
-      class="btn btn-secondary w-100 mt-2"
-      id="no-cuenta"
-      [routerLink]="['/registrar']"
-    >
-      No tengo cuenta
-    </button>
-
-    <button
-      type="button"
-      class="btn btn-secondary w-100 mt-2"
+    <a
+      class="mt-2 d-block text-center"
       id="olvide-password"
       [routerLink]="['/recuperar-password']"
     >
       He olvidado mi contraseña
-    </button>
+    </a>
 
     <div class="error-message" *ngIf="loginError">
       Usuario o contraseña incorrectos.

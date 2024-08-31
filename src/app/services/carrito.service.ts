@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 interface CarritoItem {
   id: number;
-  name: string;
+  title: string;
   price: number;
   quantity: number;
   image: string;
@@ -114,5 +114,10 @@ export class CarritoService {
     return this.carritoSubject
       .getValue()
       .reduce((total, item) => total + item.quantity, 0);
+  }
+
+  vaciarCarrito(): void {
+    this.carritoSubject.next([]);
+    this.guardarCarrito();
   }
 }

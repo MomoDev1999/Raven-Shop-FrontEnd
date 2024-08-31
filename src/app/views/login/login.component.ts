@@ -7,9 +7,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { FirebaseService } from '../../services/firebase.service';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { LoginService } from '../../services/login.service'; // Importar el nuevo servicio
 
 @Component({
   selector: 'app-login',
@@ -25,7 +25,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private firebaseService: FirebaseService
+    private loginService: LoginService // Usar el nuevo servicio
   ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -39,32 +39,41 @@ export class LoginComponent {
       const { username, password } = this.loginForm.value;
       console.log('Formulario válido', username, password);
 
-      this.firebaseService.getUsers().subscribe((users) => {
-        const user = users.find(
-          (u) => u.usuario === username && u.password === password
-        );
-        if (user) {
-          if (this.isBrowser()) {
-            localStorage.setItem('loggedIn', 'true');
-            localStorage.setItem('loggedUser', user.usuario);
-            window.dispatchEvent(new Event('storage'));
+      this.loginService.loginUser(username, password).subscribe(
+        (response) => {
+          // Verificar la respuesta del servidor
+          if (response && response.success) {
+            if (this.isBrowser()) {
+              localStorage.setItem('loggedIn', 'true');
+              localStorage.setItem('loggedUser', response.user.user); // Cambia según el campo devuelto por tu API
+              window.dispatchEvent(new Event('storage'));
+            }
+            Swal.fire({
+              icon: 'success',
+              title: 'Éxito',
+              text: 'Has iniciado sesión correctamente.',
+            }).then(() => {
+              this.router.navigate(['/index']);
+            });
+          } else {
+            this.loginError = true;
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Usuario o contraseña incorrectos.',
+            });
           }
-          Swal.fire({
-            icon: 'success',
-            title: 'Éxito',
-            text: 'Has iniciado sesión correctamente.',
-          }).then(() => {
-            this.router.navigate(['/index']);
-          });
-        } else {
+        },
+        (error) => {
+          console.error('Error en la autenticación:', error);
           this.loginError = true;
           Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'Usuario o contraseña incorrectos.',
+            text: 'Ocurrió un error al intentar iniciar sesión.',
           });
         }
-      });
+      );
     } else {
       if (this.loginForm.controls['username'].invalid) {
         Swal.fire({

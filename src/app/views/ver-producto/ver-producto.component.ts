@@ -35,4 +35,14 @@ export class VerProductoComponent implements OnInit {
       quantity: 1,
     });
   }
+
+  // Función para obtener estrellas llenas
+  getStars(rate: number): number[] {
+    return Array(Math.floor(rate)).fill(0);
+  }
+
+  // Función para obtener estrellas vacías
+  getEmptyStars(rate: number): number[] {
+    return Array(5 - Math.ceil(rate)).fill(0);
+  }
 }

@@ -1,12 +1,29 @@
-<div class="ver-producto-container">
-  <div *ngIf="producto">
-    <h1>{{ producto.title }}</h1>
-    <img [src]="producto.image" alt="{{ producto.title }}" />
-    <p>{{ producto.description }}</p>
-    <p><strong>Precio: </strong>{{ producto.price | currency }}</p>
-    <button class="btn btn-primary" (click)="agregarAlCarrito(producto)">
-      Agregar al carrito
-    </button>
+<div class="ver-producto-container mt-3 mb-3 oswald">
+  <div *ngIf="producto" class="producto-details">
+    <div class="producto-imagen">
+      <img [src]="producto.image" alt="{{ producto.title }}" />
+    </div>
+    <div class="producto-info d-flex flex-column">
+      <h1>{{ producto.title }}</h1>
+      <p>{{ producto.description }}</p>
+      <p><strong>Precio: </strong>{{ producto.price | number : "1.0-0" }}</p>
+      <div class="rating">
+        <ng-container *ngFor="let star of getStars(producto.rating.rate)">
+          <i class="fa fa-star"></i>
+        </ng-container>
+        <ng-container *ngIf="producto.rating.rate % 1 !== 0">
+          <i class="fa fa-star-half-alt"></i>
+        </ng-container>
+        <ng-container
+          *ngFor="let emptyStar of getEmptyStars(producto.rating.rate)"
+        >
+          <i class="fa-regular fa-star black"></i>
+        </ng-container>
+      </div>
+      <button class="btn btn-dark mt-auto" (click)="agregarAlCarrito(producto)">
+        AGREGAR AL CARRITO
+      </button>
+    </div>
   </div>
   <div *ngIf="!producto" class="producto-no-encontrado">
     <p>Producto no encontrado.</p>

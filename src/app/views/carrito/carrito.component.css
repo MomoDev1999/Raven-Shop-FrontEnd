@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap");
+
+.oswald {
+  font-family: "Oswald", sans-serif;
+}
+
+.title {
+  font-size: 50px;
+  font-weight: bold;
+  font-family: "UnifrakturMaguntia", sans-serif;
+  color: black;
+}
+
+.cart-item-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  background-color: rgb(226, 226, 226);
+}
+
+.cart-item-image {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-right: 15px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333333;
+}
+
+.card-text {
+  color: #555555;
+  margin-bottom: 10px;
+}
+
+.cart-item-quantity.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.btn-checkout {
+  background-color: #007bff;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-checkout:hover {
+  background-color: #0056b3;
+}
+
+.btn-clear {
+  border-color: #dc3545;
+  color: #ffffff;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-clear:hover {
+  background-color: #f8d7da;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}

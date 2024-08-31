@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FirebaseService } from '../../services/firebase.service';
 import Swal from 'sweetalert2';
+import { LoginService } from '../../services/login.service'; // Importar el nuevo servicio
 
 @Component({
   selector: 'app-editar-perfil',
@@ -25,15 +25,15 @@ export class EditarPerfilComponent implements OnInit {
   passwordMismatch: boolean = false;
   loggedUser: any = null;
 
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private loginService: LoginService) {} // Usar el nuevo servicio
 
   ngOnInit() {
     if (this.isBrowser()) {
       const loggedUsername = localStorage.getItem('loggedUser');
       if (loggedUsername) {
-        this.firebaseService.getUsers().subscribe((users) => {
+        this.loginService.getUsers().subscribe((users) => {
           this.loggedUser = users.find(
-            (user) => user.usuario === loggedUsername
+            (user: any) => user.user === loggedUsername
           );
           console.log(this.loggedUser); // Verificar los datos en la consola
           if (this.loggedUser) {
@@ -62,13 +62,13 @@ export class EditarPerfilComponent implements OnInit {
 
   loadUserData() {
     if (this.loggedUser) {
-      this.username = this.loggedUser.usuario;
-      this.phone = this.loggedUser.telefono;
-      this.firstname = this.loggedUser.nombre;
-      this.lastname = this.loggedUser.apellido;
-      this.birthdate = this.loggedUser.fecha_nacimiento;
-      this.email = this.loggedUser.correo;
-      this.address = this.loggedUser.direccion;
+      this.username = this.loggedUser.user; // Cambiado a 'user'
+      this.phone = this.loggedUser.phone; // Cambiado a 'phone'
+      this.firstname = this.loggedUser.name; // Cambiado a 'name'
+      this.lastname = this.loggedUser.lastname; // Añadido el campo 'lastname'
+      this.birthdate = this.loggedUser.birthdate; // Cambiado a 'birthdate'
+      this.email = this.loggedUser.email; // Cambiado a 'email'
+      this.address = this.loggedUser.address; // Cambiado a 'address'
     }
   }
 
@@ -159,19 +159,19 @@ export class EditarPerfilComponent implements OnInit {
 
   updateUserProfile() {
     const updatedUser = {
-      usuario: this.username,
-      telefono: this.phone,
-      nombre: this.firstname,
-      apellido: this.lastname,
-      fecha_nacimiento: this.birthdate,
-      correo: this.email,
-      direccion: this.address,
+      user: this.username,
+      phone: this.phone,
+      name: this.firstname,
+      lastname: this.lastname,
+      birthdate: this.birthdate,
+      email: this.email,
+      address: this.address,
       password: this.password,
     };
 
     if (this.loggedUser) {
       const userId = this.loggedUser.id; // Extraer el ID del usuario
-      this.firebaseService.updateUser(userId, updatedUser).subscribe(
+      this.loginService.updateUser(userId, updatedUser).subscribe(
         (response) => {
           Swal.fire({
             icon: 'success',

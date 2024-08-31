@@ -24,11 +24,21 @@
         <h5>Servicios de ayuda</h5>
         <ul>
           <li><a href="#">Servicio Al cliente</a></li>
-          <li><a href="#">Mi cuenta</a></li>
-          <li><a href="#">Preguntas frecuentes</a></li>
-          <li><a href="#">Términos y condiciones</a></li>
-          <li><a href="#">Política de devolución</a></li>
-          <li><a href="#">Aviso de privacidad</a></li>
+          <li><a [routerLink]="['/editar-perfil']">Mi cuenta</a></li>
+          <li>
+            <a [routerLink]="['/preguntas-frecuentes']">Preguntas frecuentes</a>
+          </li>
+          <li>
+            <a [routerLink]="['/terminos-y-condiciones']"
+              >Términos y condiciones</a
+            >
+          </li>
+          <li>
+            <a [routerLink]="['/']">Política de devolución</a>
+          </li>
+          <li>
+            <a [routerLink]="['/politica-privacidad']">Aviso de privacidad</a>
+          </li>
         </ul>
       </div>
 
@@ -39,10 +49,21 @@
           moda, estilo y cultura urbana. ¡Regístrate y mantente al día de todo
           lo que sucede!
         </p>
-        <button class="btn btn-white" [routerLink]="['/registrar']">
+        <button class="btn btn-white" [routerLink]="['/iniciar-sesion']">
           Registrarse
         </button>
       </div>
     </div>
+
+    <!-- <div class="row">
+      <div class="col-md-12">
+        <div id="mario-container">
+          <img
+            src="https://giffiles.alphacoders.com/117/11700.gif"
+            alt="Mario caminando"
+          />
+        </div>
+      </div>
+    </div> -->
   </div>
 </div>

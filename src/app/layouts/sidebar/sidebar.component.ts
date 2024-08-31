@@ -5,7 +5,7 @@ import { CarritoService } from '../../services/carrito.service';
 
 interface CarritoItem {
   id: number;
-  name: string;
+  title: string;
   price: number;
   quantity: number;
   image: string;
@@ -72,5 +72,9 @@ export class SidebarComponent implements OnInit {
 
   calcularTotal(): number {
     return this.carritoService.calcularTotal();
+  }
+
+  verMas(productId: number): void {
+    this.router.navigate(['/ver-producto', productId]);
   }
 }
