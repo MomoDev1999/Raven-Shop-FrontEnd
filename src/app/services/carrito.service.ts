@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 interface CarritoItem {
   id: number;
-  name: string;
+  title: string;
   price: number;
   quantity: number;
   image: string;
@@ -75,6 +75,49 @@ export class CarritoService {
       .getValue()
       .filter((item) => item.id !== producto.id);
     this.carritoSubject.next(currentCarrito);
+    this.guardarCarrito();
+  }
+
+  incrementarCantidad(producto: CarritoItem): void {
+    const currentCarrito = this.carritoSubject.getValue();
+    const itemIndex = currentCarrito.findIndex(
+      (item) => item.id === producto.id
+    );
+
+    if (itemIndex > -1) {
+      currentCarrito[itemIndex].quantity += 1;
+      this.carritoSubject.next(currentCarrito);
+      this.guardarCarrito();
+    }
+  }
+
+  decrementarCantidad(producto: CarritoItem): void {
+    const currentCarrito = this.carritoSubject.getValue();
+    const itemIndex = currentCarrito.findIndex(
+      (item) => item.id === producto.id
+    );
+
+    if (itemIndex > -1 && currentCarrito[itemIndex].quantity > 1) {
+      currentCarrito[itemIndex].quantity -= 1;
+      this.carritoSubject.next(currentCarrito);
+      this.guardarCarrito();
+    }
+  }
+
+  calcularTotal(): number {
+    return this.carritoSubject
+      .getValue()
+      .reduce((total, item) => total + item.price * item.quantity, 0);
+  }
+
+  calcularCantidadTotal(): number {
+    return this.carritoSubject
+      .getValue()
+      .reduce((total, item) => total + item.quantity, 0);
+  }
+
+  vaciarCarrito(): void {
+    this.carritoSubject.next([]);
     this.guardarCarrito();
   }
 }

@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap");
+
+.oswald {
+  font-family: "Oswald", sans-serif;
+}
+
+.title {
+  font-size: 50px;
+  font-weight: bold;
+  font-family: "UnifrakturMaguntia", sans-serif;
+  color: black;
+}
+
+.raven-logo {
+  width: 100px;
+  height: auto;
+}
+
+.items-in-cart {
+  font-size: 13px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  background-color: rgb(226, 226, 226);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.item-details {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.item-image {
+  width: 50px;
+  height: auto;
+}

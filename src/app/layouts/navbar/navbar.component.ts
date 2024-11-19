@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 
 interface CarritoItem {
   id: number;
-  name: string;
+  title: string;
   price: number;
   quantity: number;
   image: string;
@@ -23,10 +23,17 @@ interface CarritoItem {
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  cantidadTotal: number = 0;
   categories: string[] = [];
   loggedIn: boolean = false;
   carrito: CarritoItem[] = [];
   searchTerm: string = '';
+
+  mujerItems: string[] = ['Item1', 'Item2', 'Item3'];
+  hombreItems: string[] = ['Item4', 'Item5', 'Item6'];
+  calzadoItems: string[] = ['Item7', 'Item8', 'Item9'];
+  accesoriosItems: string[] = ['Item10', 'Item11', 'Item12'];
+  preventaItems: string[] = ['Item13', 'Item14', 'Item15'];
 
   constructor(
     private categoriesService: CategoriesService,
@@ -56,6 +63,7 @@ export class NavbarComponent implements OnInit {
 
     this.carritoService.carrito$.subscribe((carrito) => {
       this.carrito = carrito;
+      this.cantidadTotal = this.carritoService.calcularCantidadTotal();
     });
   }
 
@@ -76,7 +84,8 @@ export class NavbarComponent implements OnInit {
   cerrarSesion() {
     if (this.isBrowser()) {
       localStorage.setItem('loggedIn', 'false');
-      localStorage.setItem('loggedUser', 'username');
+      localStorage.setItem('loggedUser', '');
+      localStorage.setItem('loggedUserId', '');
       this.checkLoginStatus();
       this.router.navigate(['/index']);
       Swal.fire({
@@ -106,5 +115,9 @@ export class NavbarComponent implements OnInit {
       this.carritoService.eliminarDelCarrito(item);
       window.dispatchEvent(new Event('storage'));
     }
+  }
+
+  calcularTotal(): number {
+    return this.carritoService.calcularTotal();
   }
 }

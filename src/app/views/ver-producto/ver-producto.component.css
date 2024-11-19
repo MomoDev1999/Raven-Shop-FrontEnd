@@ -1,5 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap");
+
+.oswald {
+  font-family: "Oswald", sans-serif;
+}
+
 .ver-producto-container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -7,35 +13,49 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.ver-producto-container h1 {
+.producto-details {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.producto-imagen {
+  flex: 1;
+  max-width: 400px;
+  margin-right: 20px;
+}
+
+.producto-imagen img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.producto-info {
+  flex: 2;
+  max-width: 700px;
+}
+
+.producto-info h1 {
   font-size: 2rem;
   color: #333;
   margin-bottom: 20px;
-  text-align: center;
 }
 
-.ver-producto-container img {
-  display: block;
-  max-width: 250px;
-  height: auto;
-  margin: 0 auto 20px auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.ver-producto-container p {
+.producto-info p {
   font-size: 1.1rem;
   color: #555;
   line-height: 1.6;
   margin-bottom: 20px;
 }
 
-.ver-producto-container p strong {
+.producto-info p strong {
   font-weight: bold;
   color: #333;
 }
 
-.ver-producto-container .btn {
+.producto-info .btn {
   display: block;
   width: 100%;
   padding: 10px 20px;
@@ -45,20 +65,39 @@
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.ver-producto-container .btn-primary {
+.producto-info .btn-primary {
   background-color: #007bff;
   color: #fff;
   border: none;
 }
 
-.ver-producto-container .btn-primary:hover {
+.producto-info .btn-primary:hover {
   background-color: #0056b3;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.ver-producto-container .producto-no-encontrado {
+.producto-no-encontrado {
   text-align: center;
   font-size: 1.5rem;
   color: #e74c3c;
   margin-top: 20px;
+}
+
+.rating {
+  margin-top: 10px;
+}
+
+.rating .fa-star,
+.rating .fa-star-half-alt,
+.rating .fa-star-o {
+  color: #f39c12;
+  margin-right: 2px;
+}
+
+.fa-star-half-alt {
+  color: #f39c12;
+}
+
+.black {
+  color: black !important;
 }

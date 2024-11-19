@@ -20,6 +20,7 @@ import { MisComprasComponent } from './views/mis-compras/mis-compras.component';
 import { ProductService } from './services/product.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { FormularioInicioSesionComponent } from './views/formulario-inicio-sesion/formulario-inicio-sesion.component';
 
 @Component({
   selector: 'app-root',
@@ -45,6 +46,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     PoliticaPrivacidadComponent,
     CarritoComponent,
     MisComprasComponent,
+    FormularioInicioSesionComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],

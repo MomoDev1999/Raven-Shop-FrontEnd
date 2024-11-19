@@ -1,7 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './views/index/index.component';
-import { RegistrarComponent } from './views/registrar/registrar.component';
-import { LoginComponent } from './views/login/login.component';
 import { RecuperarPasswordComponent } from './views/recuperar-password/recuperar-password.component';
 import { MensajeEnviadoComponent } from './views/mensaje-enviado/mensaje-enviado.component';
 import { EditarPerfilComponent } from './views/editar-perfil/editar-perfil.component';
@@ -12,13 +10,12 @@ import { TerminosYCondicionesComponent } from './views/terminos-y-condiciones/te
 import { PoliticaPrivacidadComponent } from './views/politica-privacidad/politica-privacidad.component';
 import { CarritoComponent } from './views/carrito/carrito.component';
 import { MisComprasComponent } from './views/mis-compras/mis-compras.component';
+import { FormularioInicioSesionComponent } from './views/formulario-inicio-sesion/formulario-inicio-sesion.component';
 import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'index', pathMatch: 'full' },
   { path: 'index', component: IndexComponent },
-  { path: 'registrar', component: RegistrarComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'recuperar-password', component: RecuperarPasswordComponent },
   { path: 'mensaje-enviado', component: MensajeEnviadoComponent },
   { path: 'editar-perfil', component: EditarPerfilComponent },
@@ -29,6 +26,7 @@ export const routes: Routes = [
   { path: 'politica-privacidad', component: PoliticaPrivacidadComponent },
   { path: 'carrito', component: CarritoComponent },
   { path: 'mis-compras', component: MisComprasComponent },
+  { path: 'iniciar-sesion', component: FormularioInicioSesionComponent },
 ];
 
 @NgModule({

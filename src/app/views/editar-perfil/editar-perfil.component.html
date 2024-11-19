@@ -5,6 +5,7 @@
     (ngSubmit)="validarEditar()"
     #editarForm="ngForm"
   >
+    <!-- Usuario -->
     <div class="form-group col-md-6">
       <label for="editar-username">Usuario</label>
       <input
@@ -23,6 +24,8 @@
         Usuario es requerido y debe tener al menos 3 caracteres.
       </div>
     </div>
+
+    <!-- Teléfono -->
     <div class="form-group col-md-6">
       <label for="editar-phone">Teléfono</label>
       <input
@@ -40,48 +43,56 @@
         Teléfono es requerido y debe tener 8 dígitos.
       </div>
     </div>
+
+    <!-- Nombre -->
     <div class="form-group col-md-6">
       <label for="editar-firstname">Nombre</label>
       <input
         type="text"
         id="editar-firstname"
-        name="firstname"
-        [(ngModel)]="firstname"
+        name="firstName"
+        [(ngModel)]="firstName"
         class="form-control"
         required
       />
-      <div *ngIf="editarForm.submitted && !firstname" class="error-message">
+      <div *ngIf="editarForm.submitted && !firstName" class="error-message">
         Nombre es requerido.
       </div>
     </div>
+
+    <!-- Apellido -->
     <div class="form-group col-md-6">
       <label for="editar-lastname">Apellido</label>
       <input
         type="text"
         id="editar-lastname"
-        name="lastname"
-        [(ngModel)]="lastname"
+        name="lastName"
+        [(ngModel)]="lastName"
         class="form-control"
         required
       />
-      <div *ngIf="editarForm.submitted && !lastname" class="error-message">
+      <div *ngIf="editarForm.submitted && !lastName" class="error-message">
         Apellido es requerido.
       </div>
     </div>
+
+    <!-- Fecha de Nacimiento -->
     <div class="form-group col-md-6">
       <label for="editar-birthdate">Fecha de Nacimiento</label>
       <input
         type="date"
         id="editar-birthdate"
-        name="birthdate"
-        [(ngModel)]="birthdate"
+        name="dateOfBirth"
+        [(ngModel)]="dateOfBirth"
         class="form-control"
         required
       />
-      <div *ngIf="editarForm.submitted && !birthdate" class="error-message">
+      <div *ngIf="editarForm.submitted && !dateOfBirth" class="error-message">
         Fecha de Nacimiento es requerida.
       </div>
     </div>
+
+    <!-- Correo Electrónico -->
     <div class="form-group col-md-6">
       <label for="editar-email">Correo Electrónico</label>
       <input
@@ -99,6 +110,8 @@
         Correo electrónico es requerido y debe ser válido.
       </div>
     </div>
+
+    <!-- Dirección -->
     <div class="form-group col-md-12">
       <label for="editar-address">Dirección</label>
       <input
@@ -113,6 +126,8 @@
         Dirección es requerida.
       </div>
     </div>
+
+    <!-- Contraseña Actual -->
     <div class="form-group col-md-12">
       <label for="editar-password-actual">Contraseña Actual</label>
       <input
@@ -131,6 +146,8 @@
         Contraseña Actual es requerida y debe tener al menos 6 caracteres.
       </div>
     </div>
+
+    <!-- Nueva Contraseña -->
     <div class="form-group col-md-6">
       <label for="editar-password">Nueva Contraseña</label>
       <input
@@ -149,8 +166,10 @@
         Nueva Contraseña es requerida y debe tener al menos 6 caracteres.
       </div>
     </div>
+
+    <!-- Confirmar Contraseña -->
     <div class="form-group col-md-6">
-      <label for="editar-confirm-password">Confirmar contraseña</label>
+      <label for="editar-confirm-password">Confirmar Contraseña</label>
       <input
         type="password"
         id="editar-confirm-password"
@@ -166,6 +185,8 @@
         Las contraseñas no coinciden.
       </div>
     </div>
+
+    <!-- Botón Editar -->
     <div class="form-group col-md-12">
       <button type="submit" class="btn btn-primary w-100" id="editar-btn">
         Editar

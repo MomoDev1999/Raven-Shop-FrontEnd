@@ -1,54 +1,33 @@
 <div id="mis-compras-div" class="container mb-3">
-  <div class="row">
-    <div class="col-md-4">
+  <div class="row" *ngIf="compras && compras.length > 0; else noCompras">
+    <div class="col-md-4" *ngFor="let compra of compras">
       <div class="mis-compras-card bg-white">
         <img
-          src="../../../assets/img/producto_1.jpg"
+          [src]="compra.producto.image || '../../../assets/img/default.jpg'"
           class="img-fluid"
-          alt="Producto 1"
+          alt="{{ compra.producto.title }}"
         />
         <div class="mis-compras-card-body">
-          <h5 class="mis-compras-card-title">Producto 1</h5>
-          <p class="mis-compras-card-price">$20.00</p>
-          <p class="mis-compras-card-quantity">Cantidad: 1</p>
-          <p class="mis-compras-card-date">Fecha de Compra: 2024-06-01</p>
-          <p class="mis-compras-card-status">Estado: Entregado</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="mis-compras-card bg-white">
-        <img
-          src="../../../assets/img/producto_2.jpg"
-          class="img-fluid"
-          alt="Producto 1"
-        />
-        <div class="mis-compras-card-body">
-          <h5 class="mis-compras-card-title">Producto 2</h5>
-          <p class="mis-compras-card-price">$20.00</p>
-          <p class="mis-compras-card-quantity">Cantidad: 1</p>
-          <p class="mis-compras-card-date">Fecha de Compra: 2024-06-01</p>
-          <p class="mis-compras-card-status">Estado: Entregado</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="mis-compras-card bg-white">
-        <img
-          src="../../../assets/img/producto_3.jpg"
-          class="img-fluid"
-          alt="Producto 1"
-        />
-        <div class="mis-compras-card-body">
-          <h5 class="mis-compras-card-title">Producto 3</h5>
-          <p class="mis-compras-card-price">$20.00</p>
-          <p class="mis-compras-card-quantity">Cantidad: 1</p>
-          <p class="mis-compras-card-date">Fecha de Compra: 2024-06-01</p>
-          <p class="mis-compras-card-status">Estado: Entregado</p>
+          <h5 class="mis-compras-card-title">{{ compra.producto.title }}</h5>
+          <p class="mis-compras-card-price">
+            ${{ compra.producto.price.toFixed(2) }}
+          </p>
+          <p class="mis-compras-card-quantity">
+            Cantidad: {{ compra.cantidad }}
+          </p>
+          <p class="mis-compras-card-date">
+            Fecha de Compra: {{ compra.fecha | date : "dd/MM/yyyy" }}
+          </p>
+          <p class="mis-compras-card-status">
+            Estado: {{ compra.estado || "Pendiente" }}
+          </p>
         </div>
       </div>
     </div>
   </div>
+  <ng-template #noCompras>
+    <div class="text-center mt-5">
+      <h4>No tienes compras registradas.</h4>
+    </div>
+  </ng-template>
 </div>

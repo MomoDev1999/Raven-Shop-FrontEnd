@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CarritoService } from '../../services/carrito.service';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 interface CarritoItem {
   id: number;
-  name: string;
+  title: string;
   price: number;
   quantity: number;
   image: string;
@@ -19,14 +23,90 @@ interface CarritoItem {
 })
 export class CarritoComponent implements OnInit {
   carrito: CarritoItem[] = [];
+  cantidadTotal: number = 0;
+
+  constructor(
+    private carritoService: CarritoService,
+    private router: Router,
+    private http: HttpClient // Inyección de HttpClient para realizar la petición al backend
+  ) {}
+
+  realizarCompra(): void {
+    // Verificar si el usuario está logueado
+    const loggedIn = localStorage.getItem('loggedIn') === 'true';
+    const personaId = localStorage.getItem('loggedUserId');
+
+    console.log(personaId);
+
+    if (!loggedIn || !personaId) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Debes iniciar sesión',
+        text: 'Inicia sesión para poder realizar esta acción.',
+        showCancelButton: true,
+        confirmButtonText: 'Iniciar sesión',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Redirigir al inicio de sesión
+          this.router.navigate(['/iniciar-sesion']);
+        }
+      });
+      return; // Detener la ejecución si no hay usuario logueado
+    }
+
+    // Mostrar SweetAlert2 para confirmar la compra
+    Swal.fire({
+      title: '¿Confirmas tu compra?',
+      text: `El total es ${this.calcularTotal().toFixed(2)}`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, comprar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const compras = this.carrito.map((item) => ({
+          persona: { id: personaId }, // Usar el ID del usuario logueado
+          producto: { id: item.id },
+          cantidad: item.quantity,
+          fecha: new Date(),
+        }));
+
+        // Realizar la petición al backend
+        this.http.post('http://localhost:8080/compras', compras).subscribe(
+          (response) => {
+            Swal.fire(
+              '¡Compra realizada!',
+              'Tu pedido ha sido procesado correctamente.',
+              'success'
+            );
+            this.carritoService.vaciarCarrito();
+          },
+          (error) => {
+            Swal.fire(
+              'Error',
+              'Ocurrió un problema al procesar tu pedido.',
+              'error'
+            );
+          }
+        );
+      }
+    });
+  }
 
   ngOnInit(): void {
     if (this.isBrowser()) {
       this.cargarCarrito();
+
       window.addEventListener('storage', () => {
         this.cargarCarrito();
       });
     }
+
+    this.carritoService.carrito$.subscribe((carrito) => {
+      this.carrito = carrito;
+      this.cantidadTotal = this.carritoService.calcularCantidadTotal();
+    });
   }
 
   isBrowser(): boolean {
@@ -35,51 +115,42 @@ export class CarritoComponent implements OnInit {
 
   cargarCarrito() {
     if (this.isBrowser()) {
-      const carritoString = localStorage.getItem('carrito');
-      if (carritoString) {
-        this.carrito = JSON.parse(carritoString);
-      } else {
-        this.carrito = [
-          {
-            id: 1,
-            name: 'Producto 1',
-            price: 20,
-            quantity: 1,
-            image: 'assets/img/producto_1.jpg',
-          },
-          {
-            id: 2,
-            name: 'Producto 2',
-            price: 30,
-            quantity: 2,
-            image: 'assets/img/producto_2.jpg',
-          },
-          {
-            id: 3,
-            name: 'Producto 3',
-            price: 60,
-            quantity: 3,
-            image: 'assets/img/producto_3.jpg',
-          },
-        ];
-        localStorage.setItem('carrito', JSON.stringify(this.carrito));
-      }
+      this.carritoService.cargarCarrito();
     }
   }
 
   eliminarDelCarrito(item: CarritoItem) {
     if (this.isBrowser()) {
-      this.carrito = this.carrito.filter((i) => i.id !== item.id);
-      localStorage.setItem('carrito', JSON.stringify(this.carrito));
-      window.dispatchEvent(new Event('storage'));
+      this.carritoService.eliminarDelCarrito(item);
+      this.cargarCarrito();
     }
   }
 
   vaciarCarrito() {
     if (this.isBrowser()) {
-      this.carrito = [];
-      localStorage.setItem('carrito', JSON.stringify(this.carrito));
-      window.dispatchEvent(new Event('storage'));
+      this.carritoService.vaciarCarrito();
     }
+  }
+
+  incrementarCantidad(item: CarritoItem) {
+    if (this.isBrowser()) {
+      this.carritoService.incrementarCantidad(item);
+      this.cargarCarrito();
+    }
+  }
+
+  decrementarCantidad(item: CarritoItem) {
+    if (this.isBrowser()) {
+      this.carritoService.decrementarCantidad(item);
+      this.cargarCarrito();
+    }
+  }
+
+  calcularTotal(): number {
+    return this.carritoService.calcularTotal();
+  }
+
+  verMas(productId: number): void {
+    this.router.navigate(['/ver-producto', productId]);
   }
 }

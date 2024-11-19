@@ -28,13 +28,13 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="../../../assets/img/img_1.jpg" class="d-block" alt="..." />
+        <img src="../../../assets/img/img_3.jpg" class="d-block" alt="..." />
       </div>
       <div class="carousel-item">
         <img src="../../../assets/img/img_2.jpg" class="d-block" alt="..." />
       </div>
       <div class="carousel-item">
-        <img src="../../../assets/img/img_3.jpg" class="d-block" alt="..." />
+        <img src="../../../assets/img/img_1.jpg" class="d-block" alt="..." />
       </div>
     </div>
     <button
@@ -57,44 +57,112 @@
     </button>
   </div>
 
-  <div class="container mt-3">
+  <div class="container">
+    <h1 class="text-center oswald mt-3 mb-3">TENDENCIAS DEL MOMENTO</h1>
     <div class="row" id="product-list">
-      <div class="col-md-4" *ngFor="let producto of productos">
-        <div class="card mb-4 shadow-sm">
+      <div class="col-md-3 oswald" *ngFor="let producto of productos">
+        <div class="card mb-4 shadow-sm align-items-center">
           <img
             src="{{ producto.image }}"
             class="card-img-top mt-3"
             alt="{{ producto.title }}"
           />
-          <div class="card-body">
-            <h5
-              class="card-title text-center product-title"
-              title="{{ producto.title }}"
-            >
+          <div class="card-body text-center">
+            <p class="card-text">{{ producto.brand }}</p>
+            <h5 class="card-title product-title" title="{{ producto.title }}">
               {{ producto.title }}
             </h5>
-          </div>
-          <div class="card-footer">
-            <div class="d-flex justify-content-between align-items-center">
-              <button
-                type="button"
-                class="btn btn-sm btn-outline-secondary ver-mas-btn"
-                (click)="verMas(producto.id)"
-              >
-                Ver más
-              </button>
-              <p class="card-text">{{ producto.price }}</p>
-              <button
-                type="button"
-                class="btn btn-sm btn-primary"
-                (click)="agregarAlCarrito(producto)"
-              >
-                Agregar al carrito
-              </button>
+            <p class="card-price">$ {{ formatPrice(producto.price) }}</p>
+
+            <div class="rating">
+              <span *ngFor="let star of getStars(producto.rating.rate)">
+                <i class="bi bi-star-fill"></i>
+              </span>
+              <span *ngFor="let star of getEmptyStars(producto.rating.rate)">
+                <i class="bi bi-star"></i>
+              </span>
             </div>
+          </div>
+          <div class="card-footer text-center btn-group">
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-secondary ver-mas-btn"
+              (click)="verMas(producto.id)"
+            >
+              VER PRODUCTO
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Testimonios -->
+  <div
+    id="testimonialCarousel"
+    class="carousel slide mb-3 mt-3"
+    data-bs-ride="carousel"
+  >
+    <h1 class="text-center oswald mb-3">RESEÑAS DE NUESTROS CLIENTES</h1>
+    <div class="carousel-inner">
+      <!-- Itera sobre los testimonios agrupados en conjuntos de 4 -->
+      <div
+        *ngFor="let group of testimonials | sliceGroups : 4; let i = index"
+        [class]="i === 0 ? 'carousel-item active' : 'carousel-item'"
+      >
+        <div class="row justify-content-center">
+          <!-- Itera sobre los testimonios individuales dentro de cada grupo -->
+          <div class="col-md-2" *ngFor="let testimonial of group">
+            <div class="testimonial text-center">
+              <p class="testimonial-review">"{{ testimonial.review }}"</p>
+              <div class="testimonial-rating">
+                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                  <i
+                    *ngIf="testimonial.rate >= star"
+                    class="bi bi-star-fill"
+                  ></i>
+                  <i
+                    *ngIf="
+                      testimonial.rate >= star &&
+                      testimonial.rate < star + 1 &&
+                      testimonial.rate % 1 !== 0
+                    "
+                    class="bi bi-star-half"
+                  ></i>
+                  <i *ngIf="testimonial.rate < star" class="bi bi-star"></i>
+                </ng-container>
+              </div>
+              <h5 class="testimonial-name">{{ testimonial.name }}</h5>
+              <p class="testimonial-date">{{ testimonial.date }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#testimonialCarousel"
+      data-bs-slide="prev"
+    >
+      <span
+        class="carousel-control-prev-icon carousel-control-prev-icon-black"
+        aria-hidden="true"
+      ></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#testimonialCarousel"
+      data-bs-slide="next"
+    >
+      <span
+        class="carousel-control-next-icon carousel-control-next-icon-black"
+        aria-hidden="true"
+      ></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <!-- Fin de Testimonios -->
 </div>
