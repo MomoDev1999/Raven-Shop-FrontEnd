@@ -1,7 +1,7 @@
 <div id="carrito" class="container mb-4">
   <div class="row">
     <div class="col-md-10 mx-auto">
-      <h2 class="text-center mb-3 mt-3 oswald">MI CARRITO DE COMPRAS</h2>
+      <h2 class="text-center mb-3 mt-3 oswald">MI CARRITO DE COMPRAS :D</h2>
 
       <div *ngIf="carrito.length > 0; else emptyCart">
         <div class="row oswald">
@@ -54,7 +54,9 @@
 
         <div class="cart-summary text-end mt-4 oswald">
           <p><strong>Total:</strong> {{ calcularTotal() | currency }}</p>
-          <button class="btn btn-dark me-3">Realizar Compra</button>
+          <button class="btn btn-dark me-3" (click)="realizarCompra()">
+            Realizar Compra
+          </button>
           <button class="btn btn-danger" (click)="vaciarCarrito()">
             Vaciar Carrito
           </button>

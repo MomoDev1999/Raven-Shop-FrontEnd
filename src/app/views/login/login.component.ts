@@ -45,6 +45,7 @@ export class LoginComponent {
           if (response && response.success) {
             if (this.isBrowser()) {
               localStorage.setItem('loggedIn', 'true');
+              localStorage.setItem('loggedUserId', response.user.id); // Cambia según el campo devuelto por tu API
               localStorage.setItem('loggedUser', response.user.user); // Cambia según el campo devuelto por tu API
               window.dispatchEvent(new Event('storage'));
             }

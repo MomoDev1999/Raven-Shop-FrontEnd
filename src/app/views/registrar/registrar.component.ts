@@ -48,9 +48,9 @@ export class RegistrarComponent {
       const newUser = {
         user: this.username, // Cambiado a 'user'
         phone: this.phone, // Cambiado a 'phone'
-        name: this.firstname, // Cambiado a 'name'
-        lastname: this.lastname, // Cambiado a 'lastname'
-        birthdate: this.birthdate, // Cambiado a 'birthdate'
+        firstName: this.firstname, // Cambiado a 'name'
+        lastName: this.lastname, // Cambiado a 'lastname'
+        dateOfBirth: this.birthdate, // Cambiado a 'birthdate'
         email: this.email, // Cambiado a 'email'
         address: this.address, // Cambiado a 'address'
         password: this.password,
@@ -129,7 +129,7 @@ export class RegistrarComponent {
       this.birthdate.length > 0 &&
       this.isEmailValid(this.email) &&
       this.address.length > 0 &&
-      this.password.length >= 6
+      this.isPasswordValid(this.password)
     );
   }
 
@@ -139,6 +139,27 @@ export class RegistrarComponent {
 
   isEmailValid(email: string): boolean {
     return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email);
+  }
+
+  isPasswordValid(password: string): boolean {
+    const minLength = 8;
+    const maxLength = 16;
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    if (
+      password.length < minLength ||
+      password.length > maxLength ||
+      !hasUppercase ||
+      !hasLowercase ||
+      !hasNumber ||
+      !hasSpecialChar
+    ) {
+      return false;
+    }
+    return true;
   }
 
   resetForm() {
@@ -179,9 +200,9 @@ export class RegistrarComponent {
     if (!this.address) {
       errorMessage += 'Dirección es requerida.\n';
     }
-    if (this.password.length < 6) {
+    if (!this.isPasswordValid(this.password)) {
       errorMessage +=
-        'Contraseña es requerida y debe tener al menos 6 caracteres.\n';
+        'La contraseña debe tener entre 8 y 16 caracteres, incluir al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.\n';
     }
     if (this.password !== this.confirmPassword) {
       errorMessage +=

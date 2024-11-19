@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { LoginService } from '../../services/login.service'; // Importar el nuevo servicio
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-editar-perfil',
@@ -14,9 +14,9 @@ import { LoginService } from '../../services/login.service'; // Importar el nuev
 export class EditarPerfilComponent implements OnInit {
   username: string = '';
   phone: string = '';
-  firstname: string = '';
-  lastname: string = '';
-  birthdate: string = '';
+  firstName: string = ''; // Nombre corregido para coincidir con el backend
+  lastName: string = ''; // Corregido
+  dateOfBirth: string = ''; // Corregido
   email: string = '';
   address: string = '';
   passwordActual: string = '';
@@ -25,17 +25,17 @@ export class EditarPerfilComponent implements OnInit {
   passwordMismatch: boolean = false;
   loggedUser: any = null;
 
-  constructor(private loginService: LoginService) {} // Usar el nuevo servicio
+  constructor(private loginService: LoginService) {}
 
   ngOnInit() {
     if (this.isBrowser()) {
       const loggedUsername = localStorage.getItem('loggedUser');
       if (loggedUsername) {
-        this.loginService.getUsers().subscribe((users) => {
+        this.loginService.getUsers().subscribe((response) => {
+          const users = response.content; // Asegurar que accedemos a la lista de usuarios
           this.loggedUser = users.find(
             (user: any) => user.user === loggedUsername
           );
-          console.log(this.loggedUser); // Verificar los datos en la consola
           if (this.loggedUser) {
             this.loadUserData();
           } else {
@@ -62,13 +62,13 @@ export class EditarPerfilComponent implements OnInit {
 
   loadUserData() {
     if (this.loggedUser) {
-      this.username = this.loggedUser.user; // Cambiado a 'user'
-      this.phone = this.loggedUser.phone; // Cambiado a 'phone'
-      this.firstname = this.loggedUser.name; // Cambiado a 'name'
-      this.lastname = this.loggedUser.lastname; // Añadido el campo 'lastname'
-      this.birthdate = this.loggedUser.birthdate; // Cambiado a 'birthdate'
-      this.email = this.loggedUser.email; // Cambiado a 'email'
-      this.address = this.loggedUser.address; // Cambiado a 'address'
+      this.username = this.loggedUser.user;
+      this.phone = this.loggedUser.phone;
+      this.firstName = this.loggedUser.firstName;
+      this.lastName = this.loggedUser.lastName;
+      this.dateOfBirth = this.loggedUser.dateOfBirth;
+      this.email = this.loggedUser.email;
+      this.address = this.loggedUser.address;
     }
   }
 
@@ -110,9 +110,9 @@ export class EditarPerfilComponent implements OnInit {
     if (
       !this.username ||
       !this.phone ||
-      !this.firstname ||
-      !this.lastname ||
-      !this.birthdate ||
+      !this.firstName ||
+      !this.lastName ||
+      !this.dateOfBirth ||
       !this.email ||
       !this.address ||
       !this.passwordActual ||
@@ -161,25 +161,25 @@ export class EditarPerfilComponent implements OnInit {
     const updatedUser = {
       user: this.username,
       phone: this.phone,
-      name: this.firstname,
-      lastname: this.lastname,
-      birthdate: this.birthdate,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      dateOfBirth: this.dateOfBirth,
       email: this.email,
       address: this.address,
       password: this.password,
     };
 
     if (this.loggedUser) {
-      const userId = this.loggedUser.id; // Extraer el ID del usuario
+      const userId = this.loggedUser.id;
       this.loginService.updateUser(userId, updatedUser).subscribe(
-        (response) => {
+        () => {
           Swal.fire({
             icon: 'success',
             title: 'Éxito',
             text: 'Perfil editado correctamente.',
           });
         },
-        (error) => {
+        () => {
           Swal.fire({
             icon: 'error',
             title: 'Error',

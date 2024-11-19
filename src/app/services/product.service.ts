@@ -7,7 +7,7 @@ import { tap, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl = 'http://localhost/products_api/products';
+  private apiUrl = 'http://localhost:8080/productos';
   private productosSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
     []
   );

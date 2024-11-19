@@ -84,7 +84,8 @@ export class NavbarComponent implements OnInit {
   cerrarSesion() {
     if (this.isBrowser()) {
       localStorage.setItem('loggedIn', 'false');
-      localStorage.setItem('loggedUser', 'username');
+      localStorage.setItem('loggedUser', '');
+      localStorage.setItem('loggedUserId', '');
       this.checkLoginStatus();
       this.router.navigate(['/index']);
       Swal.fire({
