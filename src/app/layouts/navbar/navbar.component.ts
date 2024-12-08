@@ -30,9 +30,9 @@ export class NavbarComponent implements OnInit {
   searchTerm: string = '';
 
   mujerItems: string[] = ['Item1', 'Item2', 'Item3'];
-  hombreItems: string[] = ['Item4', 'Item5', 'Item6'];
+  hombreItems: string[] = ['ropa para hombres', 'Item5', 'Item6'];
   calzadoItems: string[] = ['Item7', 'Item8', 'Item9'];
-  accesoriosItems: string[] = ['Item10', 'Item11', 'Item12'];
+  accesoriosItems: string[] = ['joyería', 'Item11', 'Item12'];
   preventaItems: string[] = ['Item13', 'Item14', 'Item15'];
 
   constructor(
@@ -75,13 +75,17 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/buscar'], { queryParams: { categoria: category } });
   }
 
-  buscarProductos() {
-    this.router.navigate(['/buscar'], {
-      queryParams: { termino: this.searchTerm },
-    });
+  buscarProductos(): void {
+    if (this.searchTerm.trim() !== '') {
+      this.router.navigate(['/buscar'], {
+        queryParams: { termino: this.searchTerm },
+      });
+    } else {
+      Swal.fire('Error', 'Por favor, ingresa un término de búsqueda', 'error');
+    }
   }
 
-  cerrarSesion() {
+  cerrarSesion(): void {
     if (this.isBrowser()) {
       localStorage.setItem('loggedIn', 'false');
       localStorage.setItem('loggedUser', '');
@@ -96,21 +100,22 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  checkLoginStatus() {
+  checkLoginStatus(): void {
     if (this.isBrowser()) {
       const status = localStorage.getItem('loggedIn');
-      this.loggedIn = status === 'true';
+      this.loggedIn =
+        status === 'true' && localStorage.getItem('loggedUser') !== '';
     }
   }
 
-  cargarCarrito() {
+  cargarCarrito(): void {
     if (this.isBrowser()) {
       this.carritoService.cargarCarrito();
       window.dispatchEvent(new Event('storage'));
     }
   }
 
-  eliminarDelCarrito(item: CarritoItem) {
+  eliminarDelCarrito(item: CarritoItem): void {
     if (this.isBrowser()) {
       this.carritoService.eliminarDelCarrito(item);
       window.dispatchEvent(new Event('storage'));
@@ -119,5 +124,13 @@ export class NavbarComponent implements OnInit {
 
   calcularTotal(): number {
     return this.carritoService.calcularTotal();
+  }
+
+  // Adicional: Método para formatear precios
+  formatPrice(price: number): string {
+    return price.toLocaleString('es-CL', {
+      style: 'currency',
+      currency: 'CLP',
+    });
   }
 }

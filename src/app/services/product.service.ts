@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -13,42 +13,33 @@ export class ProductService {
   );
   public productos$: Observable<any[]> = this.productosSubject.asObservable();
 
-  constructor(private http: HttpClient) {
-    this.cargarProductos();
-  }
+  constructor(private http: HttpClient) {}
 
-  private cargarProductos(): void {
-    this.http
+  cargarProductos(): Observable<any[]> {
+    return this.http
       .get<any[]>(this.apiUrl)
-      .pipe(tap((productos) => this.productosSubject.next(productos)))
-      .subscribe();
+      .pipe(tap((productos) => this.productosSubject.next(productos)));
   }
 
   getProductos(): Observable<any[]> {
     return this.productos$;
   }
 
-  getProductoPorId(id: number): Observable<any> {
+  getProductoPorId(id: number): Observable<any | undefined> {
     const productos = this.productosSubject.getValue();
     const producto = productos.find((producto) => producto.id === id);
     return of(producto);
   }
 
   buscarPorCategoria(categoria: string): Observable<any[]> {
-    return this.productos$.pipe(
-      map((productos) =>
-        productos.filter((producto) => producto.category === categoria)
-      )
-    );
+    return this.http.get<any[]>(`${this.apiUrl}/search`, {
+      params: { keyword: categoria },
+    });
   }
 
   buscarProductos(termino: string): Observable<any[]> {
-    return this.productos$.pipe(
-      map((productos) =>
-        productos.filter((producto) =>
-          producto.title.toLowerCase().includes(termino.toLowerCase())
-        )
-      )
-    );
+    return this.http.get<any[]>(`${this.apiUrl}/search`, {
+      params: { keyword: termino },
+    });
   }
 }
