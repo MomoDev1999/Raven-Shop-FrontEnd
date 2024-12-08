@@ -77,16 +77,26 @@ export class IndexComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productService.getProductos().subscribe(
-      (productos) => {
-        this.productos = productos;
+    this.productService.cargarProductos().subscribe(
+      () => {
+        // Una vez que los productos han sido cargados, nos suscribimos al BehaviorSubject
+        this.productService.getProductos().subscribe(
+          (productos) => {
+            this.productos = productos;
+          },
+          (error) => {
+            console.error('Error al cargar los productos:', error);
+          }
+        );
       },
       (error) => {
-        console.error('Error al cargar los productos:', error);
+        console.error(
+          'Error al cargar los productos desde el servidor:',
+          error
+        );
       }
     );
   }
-
   verMas(productId: number): void {
     this.router.navigate(['/ver-producto', productId]);
   }

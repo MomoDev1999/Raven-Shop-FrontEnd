@@ -2,19 +2,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap");
 
+/* Fuente general */
 .oswald {
   font-family: "Oswald", sans-serif;
 }
 
+/* Barra superior */
 .top-bar {
   background-color: black;
   color: white;
   text-align: center;
   padding: 10px;
   font-size: 14px;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Oswald", sans-serif; /* Estilo unificado */
+  letter-spacing: 1px;
 }
 
+/* Navbar */
 .navbar {
   background-color: white;
   padding: 10px 20px;
@@ -22,10 +26,12 @@
 }
 
 .navbar-brand {
-  font-size: 30px;
+  font-size: 36px; /* Tamaño más prominente */
   font-weight: bold;
   font-family: "UnifrakturMaguntia", sans-serif;
-  color: black;
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Elegante sombra */
+  letter-spacing: 1px;
 }
 
 .navbar-toggler {
@@ -36,13 +42,14 @@
 .navbar-toggler .fas.fa-bars {
   font-size: 24px;
   color: black;
+  transition: color 0.3s ease, transform 0.3s ease; /* Efecto hover */
 }
 
-.collapse.navbar-collapse {
-  justify-content: space-between;
-  align-items: center;
+.navbar-toggler .fas.fa-bars:hover {
+  transform: scale(1.1);
 }
 
+/* Navegación */
 .navbar-nav {
   display: flex;
   list-style: none;
@@ -65,21 +72,70 @@
 
 .nav-link:hover {
   text-decoration: underline;
+  color: #303030;
 }
 
-.dropdown-menu-center {
-  left: 50% !important;
-  transform: translateX(-50%);
+/* Dropdown */
+.dropdown-item {
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px;
+  color: black;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+  color: #303030;
+}
+
+/* Estilos para pantallas grandes */
+@media (min-width: 768px) {
+  .dropdown-menu-center {
+    left: 50% !important;
+    transform: translateX(-50%);
+  }
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 767.98px) {
+  .dropdown-menu {
+    position: static !important;
+    width: 100%;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .dropdown-item {
+    text-align: center;
+    padding: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Hover para los items del dropdown */
+  .dropdown-item:hover {
+    background-color: #f8f9fa; /* Color de fondo al pasar el mouse */
+    color: #007bff; /* Color del texto al pasar el mouse */
+  }
 }
 
 .dropdown-menu-lg {
   width: 250px;
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-toggle::after {
   display: none;
 }
 
+/* Búsqueda */
 .search-container {
   display: flex;
   justify-content: center;
@@ -111,16 +167,19 @@
   padding: 10px 15px;
   border-radius: 0 20px 20px 0;
   color: white;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.search-btn:hover {
+  background-color: #303030;
+  transform: translateY(-2px);
 }
 
 .search-btn i {
   color: white;
 }
 
-.search-btn:focus {
-  outline: none;
-}
-
+/* Iconos */
 .icons {
   display: flex;
   align-items: center;
@@ -128,6 +187,17 @@
 
 .icons .nav-item {
   margin-left: 20px;
+}
+
+.nav-link-icon {
+  font-size: 24px;
+  color: black;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-link-icon:hover {
+  color: #303030;
+  transform: scale(1.1);
 }
 
 .custom-badge {
@@ -141,19 +211,43 @@
   padding: 2px 5px;
 }
 
-.nav-link-icon {
-  font-size: 24px;
+/* Texto decorado */
+.nav-text {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
   color: black;
+  margin-top: 10px;
 }
 
+/* Botones */
+.btn {
+  font-family: "Oswald", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 20px;
+  padding: 8px 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #303030;
+  color: white;
+  transform: translateY(-1.5px);
+}
+
+/* Enlace registrar */
+.enlace-registrar {
+  color: black;
+  text-decoration: underline;
+  font-weight: bold;
+  text-decoration-thickness: 2px;
+  text-decoration-color: red;
+}
+
+/* Logos */
 .raven-logo {
   width: 150px;
   height: auto;
-}
-
-.enlace-registrar {
-  color: black;
-  text-decoration: underline; /* Subrayado */
-  text-decoration-thickness: 2px;
-  text-decoration-color: red; /* Color de la línea de subrayado */
 }
