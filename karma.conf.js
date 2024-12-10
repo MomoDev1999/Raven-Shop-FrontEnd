@@ -1,4 +1,5 @@
 module.exports = function (config) {
+  console.log("Usando karma.conf.js configurado!");
   config.set({
     basePath: "",
     frameworks: ["jasmine", "@angular-devkit/build-angular"],
@@ -12,9 +13,12 @@ module.exports = function (config) {
       clearContext: false, // Deja Jasmine Spec Runner visible en el navegador
     },
     coverageReporter: {
-      dir: require("path").join(__dirname, "./coverage/mi-proyecto"),
+      dir: require("path").join(__dirname, "./coverage/mi-tienda"),
       subdir: ".",
-      reporters: [{ type: "html" }, { type: "text-summary" }],
+      reporters: [
+        { type: "html", subdir: "html-report" },
+        { type: "lcov", subdir: "lcov-report" },
+      ],
     },
     reporters: ["progress", "coverage"],
     port: 9876,

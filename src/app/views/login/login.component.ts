@@ -37,7 +37,6 @@ export class LoginComponent {
     console.log('Formulario enviado');
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
-      console.log('Formulario válido', username, password);
 
       this.loginService.loginUser(username, password).subscribe(
         (response) => {
@@ -66,7 +65,6 @@ export class LoginComponent {
           }
         },
         (error) => {
-          console.error('Error en la autenticación:', error);
           this.loginError = true;
           Swal.fire({
             icon: 'error',

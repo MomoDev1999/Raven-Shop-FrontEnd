@@ -24,7 +24,7 @@ export class MisComprasComponent implements OnInit {
         title: 'No estás logueado',
         text: 'Inicia sesión para ver tus compras.',
       });
-      return;
+      return; // Detiene la ejecución si no hay usuario logueado
     }
 
     this.misComprasService.getMisCompras(Number(personaId)).subscribe(

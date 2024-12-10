@@ -28,15 +28,12 @@ export class CarritoComponent implements OnInit {
   constructor(
     private carritoService: CarritoService,
     private router: Router,
-    private http: HttpClient // Inyección de HttpClient para realizar la petición al backend
+    private http: HttpClient
   ) {}
 
   realizarCompra(): void {
-    // Verificar si el usuario está logueado
     const loggedIn = localStorage.getItem('loggedIn') === 'true';
     const personaId = localStorage.getItem('loggedUserId');
-
-    console.log(personaId);
 
     if (!loggedIn || !personaId) {
       Swal.fire({
@@ -48,14 +45,12 @@ export class CarritoComponent implements OnInit {
         cancelButtonText: 'Cancelar',
       }).then((result) => {
         if (result.isConfirmed) {
-          // Redirigir al inicio de sesión
           this.router.navigate(['/iniciar-sesion']);
         }
       });
-      return; // Detener la ejecución si no hay usuario logueado
+      return;
     }
 
-    // Mostrar SweetAlert2 para confirmar la compra
     Swal.fire({
       title: '¿Confirmas tu compra?',
       text: `El total es ${this.calcularTotal().toFixed(2)}`,
@@ -66,15 +61,14 @@ export class CarritoComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         const compras = this.carrito.map((item) => ({
-          persona: { id: personaId }, // Usar el ID del usuario logueado
+          persona: { id: personaId },
           producto: { id: item.id },
           cantidad: item.quantity,
           fecha: new Date(),
         }));
 
-        // Realizar la petición al backend
         this.http.post('http://localhost:8080/compras', compras).subscribe(
-          (response) => {
+          () => {
             Swal.fire(
               '¡Compra realizada!',
               'Tu pedido ha sido procesado correctamente.',
@@ -82,7 +76,7 @@ export class CarritoComponent implements OnInit {
             );
             this.carritoService.vaciarCarrito();
           },
-          (error) => {
+          () => {
             Swal.fire(
               'Error',
               'Ocurrió un problema al procesar tu pedido.',
@@ -95,55 +89,31 @@ export class CarritoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.isBrowser()) {
-      this.cargarCarrito();
-
-      window.addEventListener('storage', () => {
-        this.cargarCarrito();
-      });
-    }
-
+    this.cargarCarrito();
     this.carritoService.carrito$.subscribe((carrito) => {
       this.carrito = carrito;
       this.cantidadTotal = this.carritoService.calcularCantidadTotal();
     });
   }
 
-  isBrowser(): boolean {
-    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
-  }
-
   cargarCarrito() {
-    if (this.isBrowser()) {
-      this.carritoService.cargarCarrito();
-    }
+    this.carritoService.cargarCarrito();
   }
 
   eliminarDelCarrito(item: CarritoItem) {
-    if (this.isBrowser()) {
-      this.carritoService.eliminarDelCarrito(item);
-      this.cargarCarrito();
-    }
+    this.carritoService.eliminarDelCarrito(item);
   }
 
   vaciarCarrito() {
-    if (this.isBrowser()) {
-      this.carritoService.vaciarCarrito();
-    }
+    this.carritoService.vaciarCarrito();
   }
 
   incrementarCantidad(item: CarritoItem) {
-    if (this.isBrowser()) {
-      this.carritoService.incrementarCantidad(item);
-      this.cargarCarrito();
-    }
+    this.carritoService.incrementarCantidad(item);
   }
 
   decrementarCantidad(item: CarritoItem) {
-    if (this.isBrowser()) {
-      this.carritoService.decrementarCantidad(item);
-      this.cargarCarrito();
-    }
+    this.carritoService.decrementarCantidad(item);
   }
 
   calcularTotal(): number {

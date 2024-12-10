@@ -125,7 +125,7 @@
 
 .carousel-control-prev-icon-black::before {
   content: "\f053"; /* Código de la flecha izquierda en Font Awesome */
-  font-family: "Font Awesome 6 Free"; /* Usa Font Awesome */
+
   font-weight: 900; /* Estilo de ícono sólido */
   font-size: 1.5rem; /* Tamaño del ícono */
   color: black; /* Color del ícono */
@@ -133,7 +133,7 @@
 
 .carousel-control-next-icon-black::before {
   content: "\f054"; /* Código de la flecha derecha en Font Awesome */
-  font-family: "Font Awesome 6 Free"; /* Usa Font Awesome */
+
   font-weight: 900; /* Estilo de ícono sólido */
   font-size: 1.5rem; /* Tamaño del ícono */
   color: black; /* Color del ícono */

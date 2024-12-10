@@ -22,8 +22,6 @@ export class MensajeEnviadoComponent {
 
     if (this.codigo === codigoValido) {
       console.log('Código validado correctamente');
-      // Redirigir a la página correspondiente después de la validación
-      // this.router.navigate(['/editar-perfil']);
     } else {
       console.log('Código incorrecto. Por favor, inténtelo nuevamente.');
     }
